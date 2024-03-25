@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  sisConnectApiUrl: "http://127.0.0.1:5000"
+  sisConnectApiExternalUrl: 'http://12.12.15.132:5000',
+  sisConnectApiUrl: 'http://127.0.0.1:5000',
 };
 
 /*
