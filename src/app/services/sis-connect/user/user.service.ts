@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ConfigService} from "../config/config.service";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
 import {Token} from "../../../interfaces/sis-connect/user/token";
@@ -27,11 +26,15 @@ export class UserService {
   }
 
   async logout() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + await this.storage.get('name')
-      })
-    };
-    this.http.post<BasicHttpResponse>(this.configService.getApiUrl() + '/user/logout', {}, httpOptions);
+    return this.http.post<BasicHttpResponse>(this.configService.getApiUrl() + '/user/logout',
+      {
+        text: 'logout'
+      },
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + await this.storage.get('token'),
+        })
+      }
+    );
   }
 }

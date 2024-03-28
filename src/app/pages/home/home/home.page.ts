@@ -3,7 +3,6 @@ import {HelloWorldService} from "../../../services/sis-connect/hello-world/hello
 import {UserService} from "../../../services/sis-connect/user/user.service";
 import { Storage } from '@ionic/storage-angular';
 import {Router} from "@angular/router"
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -36,10 +35,11 @@ export class HomePage implements OnInit{
     });
   }
 
-  logout() {
-    this.userService.logout().then(async () => {
+  async logout() {
+    (await this.userService.logout()).subscribe(async (response) => {
+      console.log(response);
       await this.storage.remove('token');
       await this.router.navigate(['login']);
-    });
+    })
   }
 }
