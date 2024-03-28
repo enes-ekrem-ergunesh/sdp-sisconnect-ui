@@ -18,8 +18,11 @@ export class HomePage implements OnInit{
   ) {}
 
   async ngOnInit() {
+    // Check the ionic storage for a token
     await this.storage.create();
     const token = await this.storage.get('token');
+
+    // If token is not found, redirect to login page
     if (token == null || token == '') {
       console.log('No token found!')
       await this.router.navigate(['login']);
@@ -35,11 +38,4 @@ export class HomePage implements OnInit{
     });
   }
 
-  async logout() {
-    (await this.userService.logout()).subscribe(async (response) => {
-      console.log(response);
-      await this.storage.remove('token');
-      await this.router.navigate(['login']);
-    })
-  }
 }
