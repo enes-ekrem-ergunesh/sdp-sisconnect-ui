@@ -16,20 +16,21 @@ import {Router} from "@angular/router"
 export class LoginPage implements OnInit{
   loginForm = new FormGroup({
     email: new FormControl(
-      '',
+      '2312enes@sis.edu.eg',
       [
         Validators.required,
         Validators.email
       ]
     ),
     password: new FormControl(
-      '',
+      'ewq123',
       [
         Validators.required,
       ]
     ),
     rememberMe: new FormControl(false, Validators.required),
   })
+  url = 'test'
 
   constructor(
     private userService: UserService,
@@ -40,6 +41,7 @@ export class LoginPage implements OnInit{
 
   async ngOnInit() {
     await this.storage.create();
+    this.url = window.location.href;
   }
 
   onSubmit() {
@@ -50,4 +52,5 @@ export class LoginPage implements OnInit{
     })
   }
 
+  protected readonly window = window;
 }

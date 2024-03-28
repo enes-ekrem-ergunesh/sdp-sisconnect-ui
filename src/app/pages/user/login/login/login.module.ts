@@ -17,6 +17,7 @@ import {LoginPage} from './login.page';
     NgOptimizedImage,
     LoginPage
   ],
+
 })
 export class LoginPageModule {
 }
