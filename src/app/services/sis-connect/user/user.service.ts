@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {ConfigService} from "../config/config.service";
+import {ConfigService} from "../../common/config/config.service";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
 import {Token} from "../../../interfaces/sis-connect/user/token";
 import {Storage} from '@ionic/storage-angular';
+import {catchError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,8 @@ export class UserService {
           Authorization: 'Bearer ' + await this.storage.get('token'),
         })
       }
+    ).pipe(
+      catchError((error) => this.configService.handleError(error))
     );
   }
 }

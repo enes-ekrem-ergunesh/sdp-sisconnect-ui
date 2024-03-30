@@ -1,0 +1,16 @@
+.alert-box{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+  min-width: 200px;
+  max-width: 300px;
+  height: fit-content;
+  max-height: 290px;
+
+  overflow-y: auto;
+
+  right: 5px;
+  top: 5px;
+}

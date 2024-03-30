@@ -1,0 +1,14 @@
+<div class="alert-box">
+  <div *ngFor="let alert of alerts.reverse();">
+    <div id="{{alert.id}}" class="alert alert-dismissible fade show" role="alert" [ngClass]="{
+      'alert-info': (alert.status_code >= 100 && alert.status_code < 200),
+      'alert-success': (alert.status_code >= 200 && alert.status_code < 300),
+      'alert-light': (alert.status_code >= 300 && alert.status_code < 400),
+      'alert-warning': (alert.status_code >= 400 && alert.status_code < 500),
+      'alert-danger': (alert.status_code >= 500 && alert.status_code < 600)
+      }">
+      {{ alert.message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
-import {ConfigService} from "../config/config.service";
+import {ConfigService} from "../../common/config/config.service";
 
 @Injectable({
   providedIn: 'root'
