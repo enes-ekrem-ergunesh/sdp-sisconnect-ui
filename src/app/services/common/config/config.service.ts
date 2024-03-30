@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Platform} from "@ionic/angular";
 import {environment} from "../../../../environments/environment";
 import {HttpErrorResponse} from "@angular/common/http";
-import {throwError} from "rxjs"; // change the path for dev/prod
+import {throwError} from "rxjs";
+import {AlertService} from "../alert/alert.service"; // change the path for dev/prod
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +11,22 @@ import {throwError} from "rxjs"; // change the path for dev/prod
 export class ConfigService {
   apiUrl!: string
 
-  constructor(public platform: Platform) {
-    if (environment.production){
+  constructor(
+    public platform: Platform,
+    private alertService: AlertService,
+  ) {
+    if (environment.production) {
       // declare apiUrl for production environment
-    }
-    else {
+    } else {
       this.onDev()
     }
   }
 
-  getApiUrl(){
+  getApiUrl() {
     return this.apiUrl
   }
 
-  onDev(){
+  onDev() {
     if (this.platform.is("android")) {
       this.apiUrl = environment.sisConnectApiExternalUrl
     } else {
@@ -32,7 +35,13 @@ export class ConfigService {
   }
 
   public handleError(error: HttpErrorResponse) {
-    console.log('Error occurred with status:', error.status);
+    /**
+     * Handle HTTP error
+     *
+     * @param {HttpErrorResponse}
+     * */
+    this.alertService.createAlert(error.status, "An error occurred!")
+    console.log('Error occurred with status:', error.error.message);
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);

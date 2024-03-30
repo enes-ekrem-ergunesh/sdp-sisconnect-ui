@@ -1,4 +1,9 @@
-<div class="alert-box">
+<div class="alert-box"
+  [ngClass]="{
+    'alert-box-top': position === 'top',
+    'alert-box-bottom': position === 'bottom',
+  }"
+>
   <div *ngFor="let alert of alerts.reverse();">
     <div id="{{alert.id}}" class="alert alert-dismissible fade show" role="alert" [ngClass]="{
       'alert-info': (alert.status_code >= 100 && alert.status_code < 200),
