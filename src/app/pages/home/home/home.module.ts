@@ -9,6 +9,7 @@ import {NavbarComponent} from "../../../components/common/navbar/navbar/navbar.c
 import {
   ProfileDropdownComponent
 } from "../../../components/common/navbar/profile-dropdown/profile-dropdown/profile-dropdown.component";
+import {AlertComponent} from "../../../components/common/alert/alert/alert.component";
 
 
 @NgModule({
@@ -18,6 +19,6 @@ import {
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, NavbarComponent, ProfileDropdownComponent]
+  declarations: [HomePage, NavbarComponent, ProfileDropdownComponent, AlertComponent]
 })
 export class HomePageModule {}
