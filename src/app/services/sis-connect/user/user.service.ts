@@ -23,7 +23,9 @@ export class UserService {
   }
 
   login(formValue: Partial<{ email: string | null, password: string | null, rememberMe: boolean | null }>) {
-    return this.http.post<Token>(this.configService.getApiUrl() + '/user/login', formValue);
+    return this.http.post<Token>(this.configService.getApiUrl() + '/user/login', formValue).pipe(
+      catchError((error) => this.configService.handleError(error))
+    );
   }
 
   async logout() {

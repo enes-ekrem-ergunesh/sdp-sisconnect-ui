@@ -19,6 +19,7 @@ import {AlertComponent} from "../../../components/common/alert/alert/alert.compo
     IonicModule,
     HomePageRoutingModule
   ],
+  exports : [AlertComponent],
   declarations: [HomePage, NavbarComponent, ProfileDropdownComponent, AlertComponent]
 })
 export class HomePageModule {}
