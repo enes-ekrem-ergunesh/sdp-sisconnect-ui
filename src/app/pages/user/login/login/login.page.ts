@@ -6,13 +6,14 @@ import {Token} from "../../../../interfaces/sis-connect/user/token";
 import { Storage } from '@ionic/storage-angular';
 import {Router} from "@angular/router"
 import {HomePageModule} from "../../../home/home/home.module";
+import {AppModule} from "../../../../app.module";
 
 @Component({
   standalone: true,
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  imports: [ReactiveFormsModule, NgOptimizedImage, HomePageModule]
+  imports: [ReactiveFormsModule, NgOptimizedImage, HomePageModule, AppModule]
 })
 export class LoginPage implements OnInit{
   loginForm = new FormGroup({

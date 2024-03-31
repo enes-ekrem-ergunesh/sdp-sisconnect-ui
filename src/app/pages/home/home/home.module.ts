@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {IonicModule} from '@ionic/angular';
+import {FormsModule} from '@angular/forms';
+import {HomePage} from './home.page';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import {HomePageRoutingModule} from './home-routing.module';
 import {NavbarComponent} from "../../../components/common/navbar/navbar/navbar.component";
 import {
   ProfileDropdownComponent
 } from "../../../components/common/navbar/profile-dropdown/profile-dropdown/profile-dropdown.component";
-import {AlertComponent} from "../../../components/common/alert/alert/alert.component";
+import {AppModule} from "../../../app.module";
 
 
 @NgModule({
@@ -17,9 +17,10 @@ import {AlertComponent} from "../../../components/common/alert/alert/alert.compo
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    AppModule
   ],
-  exports : [AlertComponent],
-  declarations: [HomePage, NavbarComponent, ProfileDropdownComponent, AlertComponent]
+  declarations: [HomePage, NavbarComponent, ProfileDropdownComponent]
 })
-export class HomePageModule {}
+export class HomePageModule {
+}
