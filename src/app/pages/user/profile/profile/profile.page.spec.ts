@@ -5,6 +5,7 @@ describe('ProfilePage', () => {
   let component: ProfilePage;
   let fixture: ComponentFixture<ProfilePage>;
 
+  // @ts-ignore
   beforeEach(async(() => {
     fixture = TestBed.createComponent(ProfilePage);
     component = fixture.componentInstance;

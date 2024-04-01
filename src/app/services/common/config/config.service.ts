@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Platform} from "@ionic/angular";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../../environments/environment";  // change the path for dev/prod
 import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
 import {AlertService} from "../alert/alert.service";
-import {Router} from "@angular/router"; // change the path for dev/prod
+import {Router} from "@angular/router";
+import {Storage} from "@ionic/storage-angular";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ConfigService {
   constructor(
     public platform: Platform,
     private alertService: AlertService,
+    private storage: Storage,
     private router: Router,
   ) {
     if (environment.production) {
@@ -51,7 +53,8 @@ export class ConfigService {
       case 401: // Unauthorized error; redirect to login page
         this.alertService.createAlert(error.status, "Authorization is missing! Redirecting to login page...")
         // sleep 2 seconds before redirecting to login page
-        setTimeout(() => {
+        setTimeout(async () => {
+          await this.storage.remove('token');
           this.router.navigate(['login']).then(() => console.log('Redirecting to login page...'));
         }, 2000);
         break;

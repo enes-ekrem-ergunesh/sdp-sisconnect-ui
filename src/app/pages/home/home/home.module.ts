@@ -10,6 +10,7 @@ import {
   ProfileDropdownComponent
 } from "../../../components/common/navbar/profile-dropdown/profile-dropdown/profile-dropdown.component";
 import {AlertComponent} from "../../../components/common/alert/alert/alert.component";
+import {AlertModule} from "../../../modules/common/alert/alert/alert.module";
 
 
 @NgModule({
@@ -17,9 +18,10 @@ import {AlertComponent} from "../../../components/common/alert/alert/alert.compo
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    AlertModule
   ],
-  exports : [AlertComponent],
-  declarations: [HomePage, NavbarComponent, ProfileDropdownComponent, AlertComponent]
+  exports : [],
+  declarations: [HomePage, NavbarComponent, ProfileDropdownComponent]
 })
 export class HomePageModule {}
