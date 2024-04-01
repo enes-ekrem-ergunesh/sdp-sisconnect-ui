@@ -3,6 +3,7 @@ import {HelloWorldService} from "../../../services/sis-connect/hello-world/hello
 import {UserService} from "../../../services/sis-connect/user/user.service";
 import { Storage } from '@ionic/storage-angular';
 import {Router} from "@angular/router"
+import {AlertService} from "../../../services/common/alert/alert.service";
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,6 +16,7 @@ export class HomePage implements OnInit{
               private userService: UserService,
               private storage: Storage,
               private router: Router,
+              private alertService: AlertService
   ) {}
 
   async ngOnInit() {
@@ -38,4 +40,14 @@ export class HomePage implements OnInit{
     });
   }
 
+  error(version: number) {
+    switch (version) {
+      case 1:
+        this.alertService.createAlert(404, 'This is an error message 1');
+        break;
+      case 2:
+        this.alertService.createAlert(500, 'This is an error message 2');
+        break;
+    }
+  }
 }
