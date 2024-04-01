@@ -5,6 +5,7 @@ import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-resp
 import {Token} from "../../../interfaces/sis-connect/user/token";
 import {Storage} from '@ionic/storage-angular';
 import {catchError} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class UserService {
     private http: HttpClient,
     private configService: ConfigService,
     private storage: Storage,
+    private router: Router,
   ) {
   }
 
@@ -29,17 +31,25 @@ export class UserService {
   }
 
   async logout() {
-    return this.http.post<BasicHttpResponse>(this.configService.getApiUrl() + '/user/logout',
+    // call the logout endpoint
+    return this.http.post<BasicHttpResponse>(
+      this.configService.getApiUrl() + '/user/logout',
+      {},
       {
-        text: 'logout'
-      },
-      {
-        headers: new HttpHeaders({
+        headers: new HttpHeaders({ // add the bearer token to the headers
           Authorization: 'Bearer ' + await this.storage.get('token'),
         })
       }
-    ).pipe(
-      catchError((error) => this.configService.handleError(error))
-    );
+    )
+      .pipe(  // handle the error
+        catchError((error) => this.configService.handleError(error))
+      )
+      .subscribe( // remove the token from the storage and navigate to the login page
+        async () => {
+          await this.storage.remove('token');
+          await this.router.navigate(['login']);
+        }
+      )
+      ;
   }
 }
