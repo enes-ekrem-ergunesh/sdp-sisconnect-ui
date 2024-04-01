@@ -3,9 +3,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ConfigService} from "../../common/config/config.service";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
 import {Token} from "../../../interfaces/sis-connect/user/token";
-import {Storage} from '@ionic/storage-angular';
 import {catchError} from "rxjs";
 import {Router} from "@angular/router";
+import {StorageService} from "../../common/storage/storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService,
-    private storage: Storage,
+    private storageService: StorageService,
     private router: Router,
   ) {
   }
@@ -24,10 +24,32 @@ export class UserService {
     return this.http.get<BasicHttpResponse>(this.configService.getApiUrl() + '/user/hello');
   }
 
-  login(formValue: Partial<{ email: string | null, password: string | null, rememberMe: boolean | null }>) {
-    return this.http.post<Token>(this.configService.getApiUrl() + '/user/login', formValue).pipe(
-      catchError((error) => this.configService.handleError(error))
-    );
+  async checkToken() {
+
+    const token = this.storageService.get('token');
+
+    // If token is not found, redirect to login page
+    if (await token == null) {
+      console.log('No token found!')
+      await this.router.navigate(['login']);
+    }
+  }
+
+  login(
+    formValue: Partial<{ email: string | null; password: string | null; rememberMe: boolean | null; }>
+  ) {
+    // call the login endpoint
+    return this.http.post<Token>(this.configService.getApiUrl() + '/user/login', formValue)
+      .pipe( // handle the error
+        catchError((error) => this.configService.handleError(error))
+      )
+      .subscribe( // save the token to the storage and navigate to the home page
+        (token: Token) => {
+          this.storageService.set('token', token.token);
+          this.router.navigate(['home']).then(() => console.log("Navigated to home"));
+        }
+      )
+      ;
   }
 
   async logout() {
@@ -37,7 +59,7 @@ export class UserService {
       {},
       {
         headers: new HttpHeaders({ // add the bearer token to the headers
-          Authorization: 'Bearer ' + await this.storage.get('token'),
+          Authorization: 'Bearer ' + await this.storageService.get('token')
         })
       }
     )
@@ -46,7 +68,8 @@ export class UserService {
       )
       .subscribe( // remove the token from the storage and navigate to the login page
         async () => {
-          await this.storage.remove('token');
+          // await this.storage.remove('token');
+          this.storageService.remove('token');
           await this.router.navigate(['login']);
         }
       )

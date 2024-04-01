@@ -5,7 +5,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {Router} from "@angular/router";
-import {Storage} from "@ionic/storage-angular";
+import {StorageService} from "../storage/storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ConfigService {
   constructor(
     public platform: Platform,
     private alertService: AlertService,
-    private storage: Storage,
+    private storageService: StorageService,
     private router: Router,
   ) {
     if (environment.production) {
@@ -47,27 +47,29 @@ export class ConfigService {
     // console.log('Error occurred with status:', error.error.message);
 
     switch (error.status) {
+
       case 0: // A client-side or network error occurred. Handle it accordingly.
         this.alertService.createAlert(error.status, 'An error occurred:' + error.error)
         break;
+
       case 401: // Unauthorized error; redirect to login page
-        this.alertService.createAlert(error.status, "Authorization is missing! Redirecting to login page...")
-        // sleep 2 seconds before redirecting to login page
-        setTimeout(async () => {
-          await this.storage.remove('token');
+        this.alertService.createAlert(error.status,
+          "Authorization is missing! Redirecting to login page...")
+        setTimeout(async () => { // sleep 2 seconds before redirecting to login page
+          this.storageService.remove('token');
           this.router.navigate(['login']).then(() => console.log('Redirecting to login page...'));
         }, 2000);
         break;
+
       default:
         try {
           this.alertService.createAlert(error.status, error.error.message)
-        }
-        catch (e) {
+        } catch (e) {
           this.alertService.createAlert(error.status, "An error occurred: " + error.error)
         }
+
     }
 
-    // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened!'));
   }
 }

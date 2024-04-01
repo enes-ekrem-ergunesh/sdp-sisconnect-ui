@@ -2,9 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "../../../../services/sis-connect/user/user.service";
-import {Token} from "../../../../interfaces/sis-connect/user/token";
-import { Storage } from '@ionic/storage-angular';
-import {Router} from "@angular/router"
 import {AlertModule} from "../../../../modules/common/alert/alert/alert.module";
 
 @Component({
@@ -14,7 +11,9 @@ import {AlertModule} from "../../../../modules/common/alert/alert/alert.module";
   styleUrls: ['./login.page.scss'],
   imports: [ReactiveFormsModule, NgOptimizedImage, AlertModule]
 })
-export class LoginPage implements OnInit{
+export class LoginPage implements OnInit {
+
+  url = ''
   loginForm = new FormGroup({
     email: new FormControl(
       '2312enes@sis.edu.eg',
@@ -31,27 +30,15 @@ export class LoginPage implements OnInit{
     ),
     rememberMe: new FormControl(false, Validators.required),
   })
-  url = 'test'
 
-  constructor(
-    private userService: UserService,
-    private storage: Storage,
-    private router: Router,
-  ) {
-  }
+  constructor(private userService: UserService) {  }
 
   async ngOnInit() {
-    await this.storage.create();
     this.url = window.location.href;
   }
 
   onSubmit() {
-    this.userService.login(this.loginForm.value).subscribe(async (token: Token) => {
-      console.log(token);
-      await this.storage.set('token', token.token);
-      await this.router.navigate(['home']);
-    })
+    this.userService.login(this.loginForm.value)
   }
 
-  protected readonly window = window;
 }
