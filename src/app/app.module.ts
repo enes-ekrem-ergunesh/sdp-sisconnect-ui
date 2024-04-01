@@ -9,12 +9,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from "@angular/common/http";
 
 import {IonicStorageModule} from '@ionic/storage-angular';
-import {AlertComponent} from "./components/common/alert/alert/alert.component";
 
 @NgModule({
-  declarations: [AppComponent, AlertComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
-  exports: [AlertComponent],
+  exports: [],
   providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     importProvidersFrom(HttpClientModule)
   ],
