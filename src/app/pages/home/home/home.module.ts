@@ -9,7 +9,8 @@ import {NavbarComponent} from "../../../components/common/navbar/navbar/navbar.c
 import {
   ProfileDropdownComponent
 } from "../../../components/common/navbar/profile-dropdown/profile-dropdown/profile-dropdown.component";
-import {AppModule} from "../../../app.module";
+import {AlertComponent} from "../../../components/common/alert/alert/alert.component";
+import {AlertModule} from "../../../modules/common/alert/alert/alert.module";
 
 
 @NgModule({
@@ -18,8 +19,9 @@ import {AppModule} from "../../../app.module";
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    AppModule
+    AlertModule
   ],
+  exports : [],
   declarations: [HomePage, NavbarComponent, ProfileDropdownComponent]
 })
 export class HomePageModule {
