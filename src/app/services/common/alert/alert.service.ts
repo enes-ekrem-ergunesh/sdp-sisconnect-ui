@@ -13,7 +13,7 @@ export class AlertService {
 
   createAlert(status_code: number, message: string) {
     const id = this.alertsCount() + 1; // generate unique id
-    const alert: Alert = {id: id, status_code: status_code, message: message, timeout: 300} // create alert
+    const alert: Alert = {id: id, status_code: status_code, message: message, timeout: 5} // create alert
     this.alerts.push(alert); // add alert to the alerts array
     setTimeout(() => { // remove alert after visible_for_seconds
       this.removeAlert(alert); // remove alert
@@ -34,21 +34,6 @@ export class AlertService {
       const element = document.getElementById(alert.id.toString()) as Element;
       const bsAlert = new bootstrap.Alert(element);
       bsAlert.close(); // close alert
-    }
-  }
-
-  public pauseAlertTimer(alert: Alert) {
-    /**
-     * Pause alert timer
-     *
-     * @param {Alert} alert - alert object
-     * @return {void}
-     */
-    const index = this.alerts.indexOf(alert);
-    if (index > -1) {
-      this.alerts.splice(index, 1); // remove alert
-      alert.timeout = 10000; // set visible_for_seconds to 10000
-      this.alerts.splice(index, 0, alert); // add alert back to the same position
     }
   }
 
