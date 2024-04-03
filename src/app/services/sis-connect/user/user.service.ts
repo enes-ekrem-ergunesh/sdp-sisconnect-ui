@@ -33,6 +33,64 @@ export class UserService {
       console.log('No token found!')
       await this.router.navigate(['login']);
     }
+    // If token is found, check if it is valid
+    else {
+      this.http.get<BasicHttpResponse>(
+        this.configService.getApiUrl() + '/user/verify',
+        {
+          headers: new HttpHeaders({ // add the bearer token to the headers
+            Authorization: 'Bearer ' + await token
+          })
+        }
+      )
+        .pipe( // handle the error
+          catchError(async (error) => {
+            this.configService.handleError(error);
+          })
+        )
+        .subscribe(
+          () => {
+            console.log('Token is valid');
+          }
+        )
+      ;
+
+    }
+
+  }
+
+  async isAuthorized() {
+
+    const token = this.storageService.get('token');
+
+    // If token is not found, redirect to login page
+    if (await token === null || await token === undefined) {
+      console.log('No token found!')
+      return false;
+    }
+    // If token is found, check if it is valid
+    else {
+      return this.http.get<BasicHttpResponse>(
+        this.configService.getApiUrl() + '/user/verify',
+        {
+          headers: new HttpHeaders({ // add the bearer token to the headers
+            Authorization: 'Bearer ' + await token
+          })
+        }
+      )
+        .pipe( // handle the error
+          catchError(async () => {
+            return false;
+          })
+        )
+        .subscribe(
+          () => {
+            return true;
+          }
+        )
+      ;
+
+    }
   }
 
   login(
