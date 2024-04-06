@@ -14,8 +14,12 @@ export class RouteAuthorizationGuard {
   }
 
   async canActivate() {
-    if (await this.userService.isAuthorized()) return true;
-    await this.router.navigate(['login']);
-    return !!(await this.userService.isAuthorized());
+    if (await this.userService.isAuthorized()){
+      return true;
+    }
+    else {
+      await this.router.navigate(['/login']);
+      return false;
+    }
   }
 }

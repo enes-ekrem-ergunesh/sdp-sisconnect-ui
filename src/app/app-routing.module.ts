@@ -19,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/user/profile/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/user/profile/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [RouteAuthorizationGuard]
   },
 ];
 

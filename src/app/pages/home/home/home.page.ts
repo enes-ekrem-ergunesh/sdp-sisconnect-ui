@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit() {
-    await this.userService.checkToken()
+    console.log('Home page');
   }
 
   error(version: number) {
