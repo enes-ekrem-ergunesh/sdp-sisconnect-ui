@@ -10,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/user/login/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/user/login/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [RouteAuthorizationGuard]
   },
   {
     path: '',

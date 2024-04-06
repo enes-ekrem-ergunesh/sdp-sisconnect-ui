@@ -31,7 +31,9 @@ export class LoginPage implements OnInit {
     rememberMe: new FormControl(false, Validators.required),
   })
 
-  constructor(private userService: UserService) {  }
+  constructor(
+    private userService: UserService,
+  ) {  }
 
   async ngOnInit() {
     this.url = window.location.href;
