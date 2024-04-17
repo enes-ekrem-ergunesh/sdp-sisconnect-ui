@@ -10,11 +10,17 @@
     </svg>
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><a class="dropdown-item" routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page">Enes Ekrem Ergunesh</a></li>
+    <li>
+      <a class="dropdown-item" routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page">
+        {{user.first_name }} {{user.family_name }}
+      </a>
+    </li>
     <li><a class="dropdown-item" href="#">Settings</a></li>
     <li>
       <hr class="dropdown-divider">
     </li>
-    <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+    <li>
+      <button class="dropdown-item" (click)="logout()">Logout</button>
+    </li>
   </ul>
 </div>

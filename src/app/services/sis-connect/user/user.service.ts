@@ -6,6 +6,7 @@ import {Token} from "../../../interfaces/sis-connect/user/token";
 import {catchError} from "rxjs";
 import {Router} from "@angular/router";
 import {StorageService} from "../../common/storage/storage.service";
+import {User} from "../../../interfaces/sis-connect/user/user";
 
 @Injectable({
   providedIn: 'root'
@@ -78,5 +79,18 @@ export class UserService {
         }
       )
       ;
+  }
+
+  async getUser() {
+    return this.http.get<User>(
+      this.configService.getApiUrl() + '/user',
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + await this.storageService.get('token')
+        })
+      }
+    ).pipe(
+      catchError((error) => this.configService.handleError(error))
+    )
   }
 }
