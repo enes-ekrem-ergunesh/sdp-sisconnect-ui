@@ -8,6 +8,9 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import {NavbarModule} from "../../../../modules/common/navbar/navbar/navbar.module";
+import {UpperProfileModule} from "../../../../modules/profile/upper-profile/upper-profile.module";
+import {ProfileUserInfoModule} from "../../../../modules/profile/profile-user-info/profile-user-info.module";
+import {AlertModule} from "../../../../modules/common/alert/alert/alert.module";
 
 @NgModule({
     imports: [
@@ -15,7 +18,10 @@ import {NavbarModule} from "../../../../modules/common/navbar/navbar/navbar.modu
         FormsModule,
         IonicModule,
         ProfilePageRoutingModule,
-        NavbarModule
+        NavbarModule,
+        UpperProfileModule,
+        ProfileUserInfoModule,
+        AlertModule
     ],
   declarations: [ProfilePage]
 })

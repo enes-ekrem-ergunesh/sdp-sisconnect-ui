@@ -8,7 +8,17 @@ import {UserService} from "../../../../services/sis-connect/user/user.service";
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent  implements OnInit {
-  user !: User;
+  user: User = {
+    address: '',
+    birthdate: '',
+    email: '',
+    family_name: '',
+    first_name: '',
+    gender: '',
+    id: 0,
+    is_admin: false,
+    table: ''
+  };
 
   constructor(private userService: UserService) { }
 

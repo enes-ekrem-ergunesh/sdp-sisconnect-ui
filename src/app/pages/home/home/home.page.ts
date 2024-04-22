@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../services/sis-connect/user/user.service";
 import {AlertService} from "../../../services/common/alert/alert.service";
 
 @Component({
@@ -11,7 +10,6 @@ export class HomePage implements OnInit {
   message: string = "";
 
   constructor(
-    private userService: UserService,
     private alertService: AlertService
   ) {
   }

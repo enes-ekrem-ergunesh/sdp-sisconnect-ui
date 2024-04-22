@@ -49,19 +49,27 @@ export class ConfigService {
     switch (error.status) {
 
       case 0: // A client-side or network error occurred. Handle it accordingly.
+        console.log('BUG 0: error')
         this.alertService.createAlert(error.status, 'An error occurred:' + error.error)
         break;
 
       case 401: // Unauthorized error; redirect to login page
-        this.alertService.createAlert(error.status,
-          "Authorization is missing! Redirecting to login page...")
-        setTimeout(async () => { // sleep 2 seconds before redirecting to login page
-          this.storageService.remove('token');
-          this.router.navigate(['login']).then(() => console.log('Redirecting to login page...'));
-        }, 2000);
+        const alertCallBack = () => {
+          setTimeout(async () => { // sleep 2 seconds before redirecting to login page
+            this.storageService.remove('token');
+            this.router.navigate(['login']).then(() => console.log('Redirecting to login page...'));
+          }, 2000);
+        }
+        console.log('BUG 401: error')
+        this.alertService.createAlert(
+          error.status,
+          "Authorization is missing! Redirecting to login page...",
+          alertCallBack
+        )
         break;
 
       default:
+        console.log('BUG default: error')
         try {
           this.alertService.createAlert(error.status, error.error.message)
         } catch (e) {

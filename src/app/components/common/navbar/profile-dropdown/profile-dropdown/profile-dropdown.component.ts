@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../../../services/sis-connect/user/user.service";
 import {User} from "../../../../../interfaces/sis-connect/user/user";
 
@@ -7,12 +7,23 @@ import {User} from "../../../../../interfaces/sis-connect/user/user";
   templateUrl: './profile-dropdown.component.html',
   styleUrls: ['./profile-dropdown.component.scss'],
 })
-export class ProfileDropdownComponent  implements OnInit {
-  user !: User;
+export class ProfileDropdownComponent implements OnInit {
+  user: User = {
+    address: '',
+    birthdate: '',
+    email: '',
+    family_name: '',
+    first_name: '',
+    gender: '',
+    id: 0,
+    is_admin: false,
+    table: ''
+  };
 
   constructor(
     private userService: UserService,
-  ) {}
+  ) {
+  }
 
   async ngOnInit() {
     console.log('ProfileDropdownComponent');
