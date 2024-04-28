@@ -58,6 +58,10 @@ export class ConfigService {
           setTimeout(async () => { // sleep 2 seconds before redirecting to login page
             this.storageService.remove('token');
             this.router.navigate(['login']).then(() => console.log('Redirecting to login page...'));
+            const backdrops = document.getElementsByClassName('modal-backdrop')
+            for (let i = 0; i < backdrops.length; i++) {
+              backdrops[i].remove()
+            }
           }, 2000);
         }
         console.log('BUG 401: error')
@@ -79,5 +83,14 @@ export class ConfigService {
     }
 
     return throwError(() => new Error('Something bad happened!'));
+  }
+
+  public handleSuccess(message: string) {
+    /**
+     * Handle success message
+     *
+     * @param {string}
+     * */
+    this.alertService.createAlert(200, message)
   }
 }

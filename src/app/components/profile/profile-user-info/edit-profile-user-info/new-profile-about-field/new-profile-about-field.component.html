@@ -1,0 +1,37 @@
+<div id="add-new-about-field">
+  <div class="d-grid gap-2">
+    <button class="btn btn-outline-success" type="button" (click)="toggleNewItemBeingAdded()"
+            [style]="newItemBeingAdded.getValue() ? 'display:none' : 'display:block'">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+           viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+      </svg>
+    </button>
+    <form id="new-about-field-form" [formGroup]="newProfileAboutFieldForm" (ngSubmit)="onSubmit()"
+          [style]="newItemBeingAdded.getValue() ? 'display:block' : 'display:none'">
+      <div class="container-fluid m-0 p-0">
+        <div class="row m-0 p-0">
+          <div class="col m-0 p-0">
+            <select class="form-select type-select" formControlName="type" name="type">
+              <option selected disabled value="">Choose...</option>
+              <option *ngFor="let i of profileAboutFieldTypes | async" value="{{ i.id }}">{{ i.name }}</option>
+            </select>
+          </div>
+          <div class="col-auto pe-2">
+            <input type="text" class="form-control" id="new-about-field-data" formControlName="name" name="name">
+          </div>
+          <div class="col-auto ms-0 px-0">
+            <button type="submit" class="btn btn-outline-success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                   viewBox="0 0 16 16">
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

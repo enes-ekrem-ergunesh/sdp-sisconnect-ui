@@ -8,7 +8,17 @@ import {UserService} from "../../../services/sis-connect/user/user.service";
   styleUrls: ['./upper-profile.component.scss'],
 })
 export class UpperProfileComponent implements OnInit {
-  user!: User
+  user: User = {
+    address: '',
+    birthdate: '',
+    email: '',
+    family_name: '',
+    first_name: '',
+    gender: '',
+    id: 0,
+    is_admin: false,
+    table: '',
+  }
 
   constructor(private userService: UserService) { }
 

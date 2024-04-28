@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   EditProfileUserInfoComponent
 } from "../../../../components/profile/profile-user-info/edit-profile-user-info/edit-profile-user-info/edit-profile-user-info.component";
+import {EditProfileUserInfoFormModule} from "./edit-profile-user-info-form/edit-profile-user-info-form.module";
 
 
 
@@ -10,7 +11,8 @@ import {
   declarations: [EditProfileUserInfoComponent],
   exports: [EditProfileUserInfoComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    EditProfileUserInfoFormModule
   ]
 })
 export class EditProfileUserInfoModule { }

@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ProfileAbout} from "../../../../../interfaces/profile/profile-about";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ProfileAboutFields} from "../../../../../interfaces/profile/profile-about-fields";
+import {BehaviorSubject} from "rxjs";
+import {ProfileService} from "../../../../../services/sis-connect/profile/profile.service";
 
 @Component({
   selector: 'app-edit-profile-user-info',
@@ -7,14 +9,20 @@ import {ProfileAbout} from "../../../../../interfaces/profile/profile-about";
   styleUrls: ['./edit-profile-user-info.component.scss'],
 })
 export class EditProfileUserInfoComponent  implements OnInit {
-  @Input() profileAbout!: ProfileAbout[]
+  @Input() profileAboutFields: ProfileAboutFields[] = []
+  @Output() data = new EventEmitter<any>();
 
-
-
-  constructor() { }
+  constructor(
+    private profileService: ProfileService,
+  ) {
+  }
 
   ngOnInit() {
     console.log('EditProfileUserInfoComponent');
+  }
+
+  _save(data: any) {
+    this.data.emit(data);
   }
 
 }
