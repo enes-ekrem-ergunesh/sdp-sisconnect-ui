@@ -14,7 +14,7 @@ export class AlertComponent {
 
   constructor(private alertService: AlertService) {
     this.alertService.clearAlerts();
-    this.alerts = this.alertService.alerts;console.log("BUG ALERTCOMP: ", this.alerts)
+    this.alerts = this.alertService.alerts;
   }
 
 }
