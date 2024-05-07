@@ -44,12 +44,10 @@ export class ConfigService {
      *
      * @param {HttpErrorResponse}
      * */
-    // console.log('Error occurred with status:', error.error.message);
 
     switch (error.status) {
 
       case 0: // A client-side or network error occurred. Handle it accordingly.
-        console.log('BUG 0: error')
         this.alertService.createAlert(error.status, 'An error occurred:' + error.error)
         break;
 
@@ -57,14 +55,13 @@ export class ConfigService {
         const alertCallBack = () => {
           setTimeout(async () => { // sleep 2 seconds before redirecting to login page
             this.storageService.remove('token');
-            this.router.navigate(['login']).then(() => console.log('Redirecting to login page...'));
+            this.router.navigate(['login']).then(() => {});
             const backdrops = document.getElementsByClassName('modal-backdrop')
             for (let i = 0; i < backdrops.length; i++) {
               backdrops[i].remove()
             }
           }, 2000);
         }
-        console.log('BUG 401: error')
         this.alertService.createAlert(
           error.status,
           "Authorization is missing! Redirecting to login page...",
@@ -73,7 +70,6 @@ export class ConfigService {
         break;
 
       default:
-        console.log('BUG default: error')
         try {
           this.alertService.createAlert(error.status, error.error.message)
         } catch (e) {

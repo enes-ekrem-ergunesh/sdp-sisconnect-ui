@@ -9,8 +9,7 @@ export class StorageService {
   private _storage: Storage | null = null;
 
   constructor(private storage: Storage) {
-    console.log('is storage null: ' + this._storage)
-    this.init().then(() => console.log('StorageService initialized'));
+    this.init().then(() => {});
   }
 
   async init() {

@@ -1,7 +1,7 @@
 <div id="add-new-about-field">
   <div class="d-grid gap-2">
     <button class="btn btn-outline-success" type="button" (click)="toggleNewItemBeingAdded()"
-            [style]="newItemBeingAdded.getValue() ? 'display:none' : 'display:block'">
+            [style]="newItemBeingAdded.getValue() === haveEmpty ? 'display:none' : 'display:block'">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
            viewBox="0 0 16 16">
         <path fill-rule="evenodd"
@@ -12,14 +12,21 @@
           [style]="newItemBeingAdded.getValue() ? 'display:block' : 'display:none'">
       <div class="container-fluid m-0 p-0">
         <div class="row m-0 p-0">
-          <div class="col m-0 p-0">
-            <select class="form-select type-select" formControlName="type" name="type">
-              <option selected disabled value="">Choose...</option>
-              <option *ngFor="let i of profileAboutFieldTypes | async" value="{{ i.id }}">{{ i.name }}</option>
-            </select>
-          </div>
-          <div class="col-auto pe-2">
-            <input type="text" class="form-control" id="new-about-field-data" formControlName="name" name="name">
+          <div class="col">
+            <div class="row">
+              <div class="col-5 m-0 ps-0 py-0" style="padding-right: 6px !important;">
+                <select #profileAboutFieldTypeSelect class="form-select type-select" formControlName="type" name="type"
+                        (change)="onProfileAboutFieldTypeSelectChange()">
+                  <option selected disabled value="0">Choose...</option>
+                  <option *ngFor="let i of profileAboutFieldTypes | async" value="{{ i.id }}"
+                          [style]="{'display': i.empty ? 'block' : 'none'}">{{ i.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-7 pe-2" style="padding-left: 6px !important;">
+                <input [type]="newItemType" class="form-control" id="new-about-field-data" formControlName="name" name="name">
+              </div>
+            </div>
           </div>
           <div class="col-auto ms-0 px-0">
             <button type="submit" class="btn btn-outline-success">

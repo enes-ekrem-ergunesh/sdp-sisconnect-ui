@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Alert} from "../../../interfaces/common/alert/alert";
 import * as bootstrap from 'bootstrap';
 import {AlertCallback} from "../../../interfaces/common/alert/alert-callback";
@@ -14,9 +14,7 @@ export class AlertService {
 
   createAlert(status_code: number, message: string, callback?: AlertCallback) {
     if (this.haveAlerts(status_code) && [401].includes(status_code)) {
-      const existingAlert = this.getAlerts(status_code)[0];
-      console.log('BUG: Alert already exists');
-      return existingAlert;
+      return this.getAlerts(status_code)[0];
     }
     const id = this.alertsCount() + 1; // generate unique id
     const alert: Alert = {id: id, status_code: status_code, message: message, timeout: 3} // create alert

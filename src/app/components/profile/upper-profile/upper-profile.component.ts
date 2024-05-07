@@ -23,12 +23,12 @@ export class UpperProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   async ngOnInit() {
-    console.log('UpperProfileComponent')
+    // console.log('UpperProfileComponent')
     await this.getUser();
   }
 
   async getUser() {
-    (await this.userService.getUser()).subscribe((user) => {
+    (await this.userService.getUserById()).subscribe((user) => {
       this.user = user;
     });
   }

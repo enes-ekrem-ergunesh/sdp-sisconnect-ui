@@ -14,7 +14,7 @@ export class RouteAuthorizationGuard {
   }
 
   async canActivate(route: ActivatedRouteSnapshot) {
-    console.log('route: ' + route.routeConfig?.path)
+    // console.log('route: ' + route.routeConfig?.path)
 
     if (await this.userService.isAuthorized()) { // if the user is authorized and tries to access...
       if (route.routeConfig?.path === 'login') { // ... login page

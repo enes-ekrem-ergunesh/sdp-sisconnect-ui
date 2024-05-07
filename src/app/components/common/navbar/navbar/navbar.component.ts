@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../../../interfaces/sis-connect/user/user";
 import {UserService} from "../../../../services/sis-connect/user/user.service";
+import {ProfileService} from "../../../../services/sis-connect/profile/profile.service";
 
 @Component({
   selector: 'app-navbar',
@@ -20,10 +21,13 @@ export class NavbarComponent  implements OnInit {
     table: ''
   };
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private profileService: ProfileService
+  ) { }
 
   async ngOnInit() {
-    console.log('NavbarComponent');
+    // console.log('NavbarComponent');
     await this.getUser();
   }
 
@@ -31,6 +35,10 @@ export class NavbarComponent  implements OnInit {
     (await this.userService.getUser()).subscribe((user) => {
       this.user = user;
     });
+  }
+
+  prepareProfileRoute() {
+    return this.profileService.prepareProfileRoute(this.user)
   }
 
 }

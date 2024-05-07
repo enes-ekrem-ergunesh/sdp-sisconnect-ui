@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ConfigService} from "../../common/config/config.service";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
 import {Token} from "../../../interfaces/sis-connect/user/token";
-import {catchError} from "rxjs";
-import {Router} from "@angular/router";
+import {catchError, Observable} from "rxjs";
+import {Params, Router} from "@angular/router";
 import {StorageService} from "../../common/storage/storage.service";
 import {User} from "../../../interfaces/sis-connect/user/user";
 
@@ -12,6 +12,8 @@ import {User} from "../../../interfaces/sis-connect/user/user";
   providedIn: 'root'
 })
 export class UserService {
+
+  public profilePageRouteParams!: Observable<Params>;
 
   constructor(
     private http: HttpClient,
@@ -31,13 +33,7 @@ export class UserService {
     await this.storageService.init();
     const token = await this.storageService.get('token');
 
-    if (token === null || token === undefined) {
-      console.log('No token found!')
-      return false;
-    } else {
-      console.log('Token found!')
-      return true;
-    }
+    return !(token === null || token === undefined);
   }
 
   login(
@@ -51,7 +47,7 @@ export class UserService {
       .subscribe( // save the token to the storage and navigate to the home page
         (token: Token) => {
           this.storageService.set('token', token.token);
-          this.router.navigate(['home']).then(() => console.log("Navigated to home"));
+          this.router.navigate(['home']).then(() => {});
         }
       )
       ;
@@ -93,4 +89,23 @@ export class UserService {
       catchError((error) => this.configService.handleError(error))
     )
   }
+
+  async getUserById() {
+    let id = 0;
+    this.profilePageRouteParams.subscribe((params) => {
+      id = <number>params['username'].split('_')[1];
+    console.log("user service > getUserById > id: ", params['username'].split('_')[1])
+    });
+    return this.http.get<User>(
+      this.configService.getApiUrl() + '/user/' + id,
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + await this.storageService.get('token')
+        })
+      }
+    ).pipe(
+      catchError((error) => this.configService.handleError(error))
+    )
+  }
+
 }

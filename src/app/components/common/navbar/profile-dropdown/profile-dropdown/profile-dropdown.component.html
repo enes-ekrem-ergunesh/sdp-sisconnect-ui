@@ -11,7 +11,7 @@
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
     <li>
-      <a class="dropdown-item" routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <a class="dropdown-item" routerLink="/profile/{{prepareProfileRoute()}}" routerLinkActive="active" ariaCurrentWhenActive="page">
         {{user.first_name }} {{user.family_name }}
       </a>
     </li>

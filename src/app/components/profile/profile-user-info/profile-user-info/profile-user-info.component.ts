@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfileService} from "../../../../services/sis-connect/profile/profile.service";
 import {ProfileAboutFields} from "../../../../interfaces/profile/profile-about-fields";
-import {FormArray, FormControl} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
 
 @Component({
@@ -10,48 +9,23 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./profile-user-info.component.scss'],
 })
 export class ProfileUserInfoComponent implements OnInit {
-  profileAboutFields: ProfileAboutFields[] = []
-
-  localProfileAboutFields!: BehaviorSubject<ProfileAboutFields[]>;
+  infoProfileAboutFields!: BehaviorSubject<ProfileAboutFields[]>;
+  isEmpty!: BehaviorSubject<boolean>;
 
   constructor(
     private profileService: ProfileService,
   ) {
-    this.localProfileAboutFields = profileService.getLocalProfileAboutFields()
+    this.profileService.initProfileAboutFields().then(() => {
+      // console.log('initLocalProfileAboutFields')
+    });
+    this.infoProfileAboutFields = profileService.getInfoProfileAboutFields()
   }
 
   async ngOnInit() {
-    console.log('ProfileUserInfoComponent')
-    await this.getProfileAboutFields()
-  }
-
-  async getProfileAboutFields() {
-    (await this.profileService.getProfileId()).subscribe(async (data) => {
-      (await this.profileService.getProfileAboutFields(data.id)).subscribe((data: ProfileAboutFields[]) => {
-        this.profileAboutFields = data
-      })
-    });
-  }
-
-  async onSaved(data: any) {
-    if (data.submitted) {
-      await this.profileService.updateProfileAboutFields(this.profileAboutFields)
-      await this.getProfileAboutFields()
-    } else {
-      setTimeout(async () => {
-        await this.getProfileAboutFields()
-        this.resetForm(data.form, data.fields)
-      }, 200)
-    }
-  }
-
-  resetForm(form: FormArray<any>, fields: ProfileAboutFields[]) {
-    this.profileService.resetNewProfileAboutItemBeingAdded()
-    form.clear()
-    fields.forEach((field) => {
-      form.push(
-        new FormControl(field.data)
-      );
+    // console.log('ProfileUserInfoComponent')
+    this.infoProfileAboutFields.subscribe((data) => {
+      // console.log('profile-user-info.component.ts>localProfileAboutFields', data)
+      this.isEmpty = new BehaviorSubject<boolean>(data.filter((item) => !item.deleted_at).length === 0)
     })
   }
 

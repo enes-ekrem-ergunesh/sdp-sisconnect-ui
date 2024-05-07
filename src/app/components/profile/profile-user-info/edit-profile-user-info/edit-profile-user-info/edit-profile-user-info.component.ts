@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ProfileAboutFields} from "../../../../../interfaces/profile/profile-about-fields";
+import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {ProfileService} from "../../../../../services/sis-connect/profile/profile.service";
 
@@ -9,20 +8,21 @@ import {ProfileService} from "../../../../../services/sis-connect/profile/profil
   styleUrls: ['./edit-profile-user-info.component.scss'],
 })
 export class EditProfileUserInfoComponent  implements OnInit {
-  @Input() profileAboutFields: ProfileAboutFields[] = []
-  @Output() data = new EventEmitter<any>();
+  owned!: BehaviorSubject<boolean>;
 
   constructor(
     private profileService: ProfileService,
   ) {
+    this.owned = this.profileService.isProfileOwned()
   }
 
   ngOnInit() {
     console.log('EditProfileUserInfoComponent');
   }
 
-  _save(data: any) {
-    this.data.emit(data);
+  onClose(){
+    this.profileService.onProfileAboutModalClose();
   }
+
 
 }

@@ -1,11 +1,10 @@
 <div class="container-fluid text-end px-0 mb-3">
   <div class="row">
     <div class="col-auto">
-      <h3 class="h3">About</h3>
+      <h3 class="h3">About Me</h3>
     </div>
-    <div class="col-auto ms-auto">
-      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-              data-bs-target="#editProfileUserInfoModal">
+    <div class="col-auto ms-auto" *ngIf="owned | async">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editProfileUserInfoModal">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square"
              viewBox="0 0 16 16">
           <path
@@ -23,10 +22,10 @@
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editProfileUserInfoModalLabel">About you</h1>
-        <button (click)="_save(false)" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="editProfileUserInfoModalLabel">About Me</h1>
+        <button (click)="onClose()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <app-edit-profile-user-info-form [profileAboutFields]="profileAboutFields" (data)="_save($event)"></app-edit-profile-user-info-form>
+      <app-edit-profile-user-info-form></app-edit-profile-user-info-form>
     </div>
   </div>
 </div>

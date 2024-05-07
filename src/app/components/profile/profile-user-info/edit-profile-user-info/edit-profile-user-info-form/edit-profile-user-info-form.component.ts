@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProfileService} from "../../../../../services/sis-connect/profile/profile.service";
 import {ProfileAboutFields} from "../../../../../interfaces/profile/profile-about-fields";
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
+import {AlertService} from "../../../../../services/common/alert/alert.service";
 
 @Component({
   selector: 'app-edit-profile-user-info-form',
@@ -10,42 +11,32 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./edit-profile-user-info-form.component.scss'],
 })
 export class EditProfileUserInfoFormComponent implements OnInit {
-  @Input() profileAboutFields: ProfileAboutFields[] = [
-    {
-      created_at: '',
-      data: '',
-      deleted_at: '',
-      id: 0,
-      profile_field_type_data_type: '',
-      profile_field_type_id: 0,
-      profile_field_type_name: '',
-      profile_id: 0,
-      updated_at: ''
-    }
-  ]
-  @Output() data = new EventEmitter<any>();
+  @ViewChild('closeButton') closeButton: any;
+
+  editProfileAboutFields!: BehaviorSubject<ProfileAboutFields[]>;
 
   profileAboutForm!: FormGroup;
   profileAboutFormArray!: FormArray;
 
-
   constructor(
     private profileService: ProfileService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alertService: AlertService
   ) {
+    this.editProfileAboutFields = profileService.getEditProfileAboutFields()
   }
 
   async ngOnInit() {
-    console.log('EditProfileUserInfoFormComponent');
+    // console.log('EditProfileUserInfoFormComponent');
     this.profileAboutForm = this.fb.group({
       profileAboutFormArray: this.fb.array([])
     });
     this.profileAboutFormArray = this.profileAboutForm.get('profileAboutFormArray') as FormArray;
-    (await this.profileService.getProfileAboutFields(5)).subscribe((data) => {
-      data.forEach((field) => {
+    this.editProfileAboutFields.subscribe((fields) => {
+      this.profileAboutFormArray.clear()
+      fields.forEach((field) => {
         this.formAddItem(field.data)
       })
-      this.profileAboutFields = data
     })
   }
 
@@ -55,40 +46,36 @@ export class EditProfileUserInfoFormComponent implements OnInit {
     );
   }
 
-  _save(submitted: boolean) {
-    if (!submitted) {
-      this.data.emit({submitted: submitted, form: this.profileAboutFormArray, fields: this.profileAboutFields});
-    } else {
-      this.data.emit({submitted: submitted, form: null, fields: null});
-    }
-  }
-
   removeProfileAboutField(id: number) {
-    const index = this.profileAboutFields.findIndex((field) => field.id === id)
-    this.profileAboutFields[index].deleted_at = new Date().toISOString().slice(0, 19).replace('T', ' ')
-    console.log(this.profileAboutFields)
-  }
-
-  addProfileAboutField(data: {name: string, type: string, type_name: string, type_id: number}) {
-    this.profileAboutFields.push({
-      created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      data: data.name,
-      deleted_at: '',
-      id: 0,
-      profile_field_type_data_type: data.type,
-      profile_field_type_id: data.type_id,
-      profile_field_type_name: data.type_name,
-      profile_id: 5,
-      updated_at: ''
-    })
+    this.profileService.removeFromEditProfileAboutFields(id)
   }
 
   onSubmit() {
-    for (let i = 0; i < this.profileAboutFields.length; i++) {
-      this.profileAboutFields[i].data = this.profileAboutFormArray.value[i]
+    // Validate
+    for (let i = 0; i < this.profileAboutFormArray.controls.length; i++) {
+      if (this.profileAboutFormArray.controls[i].value === '' ||
+        this.profileAboutFormArray.controls[i].value === null ||
+        this.profileAboutFormArray.controls[i].value === undefined) {
+        this.alertService.createAlert(
+          400,
+           'Field is required: "' + this.editProfileAboutFields.value[i].profile_field_type_name + '".'
+        )
+        // console.log(this.editProfileAboutFields.value[i].profile_field_type_name)
+        return
+      }
     }
-    console.log(this.profileAboutFields)
-    this._save(true)
+
+    for (let i = 0; i < this.profileAboutFormArray.controls.length; i++) {
+      this.editProfileAboutFields.value[i].data = this.profileAboutFormArray.controls[i].value
+    }
+    this.profileService.updateProfileAboutFields(this.editProfileAboutFields.value).then(() => {
+      this.profileService.fetchInfoProfileAboutFields()
+    })
+    this.closeButton.nativeElement.click() // close modal
+  }
+
+  onCancel() {
+      this.profileService.onProfileAboutModalClose()
   }
 
 }

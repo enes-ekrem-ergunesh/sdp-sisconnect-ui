@@ -1,35 +1,40 @@
 <form [formGroup]="profileAboutForm" (ngSubmit)="onSubmit()">
   <div class="modal-body">
     <div formArrayName="profileAboutFormArray">
-      <div class="row mb-3 g-3 align-items-center"
-           *ngFor="let pf of profileAboutFormArray.controls; let i = index"
-      >
-        <ng-template [ngIf]="profileAboutFields[i].deleted_at === null">
-          <div class="col-auto">
-            <label [for]="profileAboutFields[i].id"
-                   class="form-label">{{ profileAboutFields[i].profile_field_type_name }}</label>
-          </div>
-          <div class="col-auto ms-auto">
-            <input [type]="profileAboutFields[i].profile_field_type_data_type" class="form-control"
-                   [name]="profileAboutFields[i].profile_field_type_name" [id]="profileAboutFields[i].id"
-                   [formControl]="$any(profileAboutFormArray).controls[i]">
-          </div>
-          <div class="col-auto ms-0 ps-0">
-            <button type="button" class="btn btn-outline-danger"
-                    (click)="removeProfileAboutField(profileAboutFields[i].id)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash"
-                   viewBox="0 0 16 16">
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"></path>
-              </svg>
-            </button>
-          </div>
-        </ng-template>
-      </div>
+      <ng-template ngFor let-field [ngForOf]="editProfileAboutFields | async" let-i="index">
+        <div class="row mb-3 g-3 align-items-center">
+          <ng-template [ngIf]="field.deleted_at === null && field.data !== null && field.data !== ''">
+            <div class="col">
+              <div class="row">
+                <div class="col-5">
+                  <label [for]="field.id"
+                         class="form-label">{{ field.profile_field_type_name }}</label>
+                </div>
+                <div class="col-7 ms-auto">
+                  <input [type]="field.profile_field_type_data_type" class="form-control"
+                         [name]="field.profile_field_type_name"
+                         [id]="field.id"
+                         [formControl]="$any(profileAboutFormArray).controls[i]">
+                </div>
+              </div>
+            </div>
+            <div class="col-auto ms-0 ps-0">
+              <button type="button" class="btn btn-outline-danger"
+                      (click)="removeProfileAboutField(field.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash"
+                     viewBox="0 0 16 16">
+                  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"></path>
+                </svg>
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </ng-template>
     </div>
-    <app-new-profile-about-field  (newProfileAboutField)="addProfileAboutField($event)"></app-new-profile-about-field>
+    <app-new-profile-about-field></app-new-profile-about-field>
   </div>
   <div class="modal-footer">
-    <button (click)="_save(false)" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button (click)="onCancel()" type="button" class="btn btn-secondary" data-bs-dismiss="modal" #closeButton>Close</button>
     <button type="submit" class="btn btn-primary">Save changes</button>
   </div>
 </form>

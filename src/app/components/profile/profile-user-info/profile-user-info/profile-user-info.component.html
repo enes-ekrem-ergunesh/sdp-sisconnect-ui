@@ -1,19 +1,19 @@
 <div class="container-fluid pt-3 border border-secondary rounded">
-  <app-edit-profile-user-info [profileAboutFields]="profileAboutFields" (data)="onSaved($event)"></app-edit-profile-user-info>
+  <app-edit-profile-user-info></app-edit-profile-user-info>
   <div class="row">
     <div class="col-12">
-      <ng-template ngFor let-item [ngForOf]="localProfileAboutFields | async" let-i="index">
-        <div class="row">
-          <div class="col-auto">
-            <p class="p-0">{{ item.profile_field_type_name }}:</p>
-          </div>
-          <div class="col-auto ms-auto">
-            <p class="text-end fw-bold">{{ item.data }}</p>
-          </div>
+      <ng-template ngFor let-field [ngForOf]="infoProfileAboutFields | async" let-i="index">
+        <div class="row" *ngIf="field.deleted_at === null && field.data !== null && field.data !== ''">
+            <div class="col-auto">
+              <p class="p-0">{{ field.profile_field_type_name }}:</p>
+            </div>
+            <div class="col-auto ms-auto">
+              <p class="text-end fw-bold">{{ field.data }}</p>
+            </div>
         </div>
       </ng-template>
     </div>
-    <div class="col-12" *ngIf="profileAboutFields.length === 0">
+    <div class="col-12" *ngIf="isEmpty.value">
       <p class="text-center">No data found!</p>
     </div>
   </div>
