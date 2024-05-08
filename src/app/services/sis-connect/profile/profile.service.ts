@@ -8,7 +8,7 @@ import {AlertService} from "../../common/alert/alert.service";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
 import {ProfileAboutFieldType} from "../../../interfaces/profile/profile-about-field-type";
 import {User} from "../../../interfaces/sis-connect/user/user";
-import {Params} from "@angular/router";
+import {Params, Router} from "@angular/router";
 import {UserService} from "../user/user.service";
 
 @Injectable({
@@ -31,7 +31,8 @@ export class ProfileService {
     private configService: ConfigService,
     private storageService: StorageService,
     private alertService: AlertService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
   ) {
   }
 

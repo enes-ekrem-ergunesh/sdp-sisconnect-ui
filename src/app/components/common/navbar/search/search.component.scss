@@ -1,0 +1,23 @@
+.search-container {
+  position: absolute;
+  top: 110%;
+  border: 2px solid #2b2b31;
+  border-radius: 10px;
+  width: 356px;
+  padding: 10px;
+  background-color: #2b2b31;
+}
+
+.search-item {
+  display: flex;
+  border-color: transparent;
+  margin-bottom: 5px;
+}
+
+.search-image {
+}
+
+.search-text {
+  margin-left: 10px;
+  margin-bottom: 0;
+}

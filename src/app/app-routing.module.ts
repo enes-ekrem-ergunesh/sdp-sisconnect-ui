@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user/profile/profile/profile.module').then( m => m.ProfilePageModule),
     canActivate: [RouteAuthorizationGuard]
   },
+  {
+    path: '404',
+    loadChildren: () => import('./pages/common/not-found/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
 ];
 
 @NgModule({

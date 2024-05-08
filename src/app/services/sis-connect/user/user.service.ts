@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ConfigService} from "../../common/config/config.service";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
 import {Token} from "../../../interfaces/sis-connect/user/token";
-import {catchError, Observable} from "rxjs";
+import {BehaviorSubject, catchError, Observable} from "rxjs";
 import {Params, Router} from "@angular/router";
 import {StorageService} from "../../common/storage/storage.service";
 import {User} from "../../../interfaces/sis-connect/user/user";
@@ -14,6 +14,8 @@ import {User} from "../../../interfaces/sis-connect/user/user";
 export class UserService {
 
   public profilePageRouteParams!: Observable<Params>;
+
+  public userSearchResults = new BehaviorSubject<User[]>([])
 
   constructor(
     private http: HttpClient,
@@ -106,6 +108,25 @@ export class UserService {
     ).pipe(
       catchError((error) => this.configService.handleError(error))
     )
+  }
+
+  async searchUsers(search: string) {
+    if (search.length < 3) {
+      this.userSearchResults.next([])
+      return
+    }
+    return this.http.get<User[]>(
+      this.configService.getApiUrl() + '/user/search/' + search,
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + await this.storageService.get('token')
+        })
+      }
+    ).pipe(
+      catchError((error) => this.configService.handleError(error))
+    ).subscribe((users: any) => {
+      this.userSearchResults.next(users['users'])
+    });
   }
 
 }

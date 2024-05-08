@@ -55,7 +55,8 @@ export class ConfigService {
         const alertCallBack = () => {
           setTimeout(async () => { // sleep 2 seconds before redirecting to login page
             this.storageService.remove('token');
-            this.router.navigate(['login']).then(() => {});
+            this.router.navigate(['login']).then(() => {
+            });
             const backdrops = document.getElementsByClassName('modal-backdrop')
             for (let i = 0; i < backdrops.length; i++) {
               backdrops[i].remove()
@@ -68,6 +69,10 @@ export class ConfigService {
           alertCallBack
         )
         break;
+
+      case 404:
+          this.router.navigate(['404']).then(() => {});
+          break;
 
       default:
         try {

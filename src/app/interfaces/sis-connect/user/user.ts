@@ -6,6 +6,7 @@ export interface User {
   "first_name": string,
   "gender": string,
   "id": number,
+  "user_id"?: number,
   "is_admin": boolean,
   "table": string
 }

@@ -35,7 +35,7 @@ export class EditProfileUserInfoFormComponent implements OnInit {
     this.editProfileAboutFields.subscribe((fields) => {
       this.profileAboutFormArray.clear()
       fields.forEach((field) => {
-        this.formAddItem(field.data)
+        if (field.data !== null) this.formAddItem(field.data)
       })
     })
   }
