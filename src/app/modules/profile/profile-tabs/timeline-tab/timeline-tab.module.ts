@@ -8,7 +8,7 @@ import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [TimelineTabComponent, PostComponent],
-  exports: [TimelineTabComponent],
+    exports: [TimelineTabComponent, PostComponent],
     imports: [
         CommonModule,
         FormsModule

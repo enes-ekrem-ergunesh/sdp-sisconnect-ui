@@ -3,7 +3,7 @@
   <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
 <div class="search-container" *ngIf="searchResults.value.length !== 0">
-  <div (click)="reset()" [routerLink]="['/profile/' + linkToProfile(r)]" class="search-item btn btn-outline-light" *ngFor="let r of searchResults | async">
+  <div (click)="reset()" [routerLink]="['/profile/' + linkToProfile(r)]" class="search-item btn" *ngFor="let r of searchResults | async">
     <div class="search-image">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle"
            viewBox="0 0 16 16">

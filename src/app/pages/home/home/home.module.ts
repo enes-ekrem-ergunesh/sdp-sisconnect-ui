@@ -7,16 +7,18 @@ import {HomePage} from './home.page';
 import {HomePageRoutingModule} from './home-routing.module';
 import {AlertModule} from "../../../modules/common/alert/alert/alert.module";
 import {NavbarModule} from "../../../modules/common/navbar/navbar/navbar.module";
+import {TimelineTabModule} from "../../../modules/profile/profile-tabs/timeline-tab/timeline-tab.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    AlertModule,
-    NavbarModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        AlertModule,
+        NavbarModule,
+        TimelineTabModule
+    ],
   exports: [],
   declarations: [HomePage]
 })

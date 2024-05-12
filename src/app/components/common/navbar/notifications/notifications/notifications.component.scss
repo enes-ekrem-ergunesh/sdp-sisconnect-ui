@@ -2,11 +2,11 @@
   position: absolute;
   top: 110%;
   right: 5px;
-  border: 2px solid #2b2b31;
+  border: 2px solid rgb(var(--bs-body-color-rgb));
   border-radius: 10px;
   width: 356px;
   padding: 10px;
-  background-color: #2b2b31;
+  background-color: rgb(var(--bs-body-bg-rgb));
 }
 
 @mixin notification-container-collapsed {

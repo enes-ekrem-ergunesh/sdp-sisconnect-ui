@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Post} from "../../../../../../interfaces/sis-connect/post/post";
 import {PostService} from "../../../../../../services/sis-connect/post/post.service";
@@ -11,7 +11,8 @@ import {User} from "../../../../../../interfaces/sis-connect/user/user";
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
 })
-export class PostComponent  implements OnInit {
+export class PostComponent implements OnInit {
+  @Input() page!: string;
   user: User = {
     address: '',
     birthdate: '',
@@ -30,11 +31,16 @@ export class PostComponent  implements OnInit {
     private postService: PostService,
     private userService: UserService,
     private alertService: AlertService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.getPostsByUser().then()
-    this.getUser().then()
+    if (this.page === 'profile') {
+      this.getPostsByUser().then()
+      this.getUser().then()
+    } else if (this.page === 'home') {
+      this.getConnectionsPosts().then()
+    }
   }
 
   async getUser() {
@@ -46,6 +52,13 @@ export class PostComponent  implements OnInit {
   async getPostsByUser() {
     console.log("DEBUGGGGG");
     (await this.postService.get_posts_by_user_id()).subscribe(posts => {
+      this.posts = new BehaviorSubject<Post[]>(posts)
+      console.log("posts", posts)
+    })
+  }
+
+  async getConnectionsPosts() {
+    (await this.postService.get_all_posts_of_connections()).subscribe(posts => {
       this.posts = new BehaviorSubject<Post[]>(posts)
       console.log("posts", posts)
     })

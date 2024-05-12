@@ -1,12 +1,12 @@
-//.link-white {
-//  color: rgba(255, 255, 255, 0.65);
-//}
-//.link-white:hover {
-//  color: rgba(255, 255, 255, 0.85);
-//}
-//.link-white:active {
-//  color: rgba(255, 255, 255, 1);
-//}
+.link-white {
+  color: rgb(var(--bs-body-color-rgb));
+}
+.link-white:hover {
+  color: rgb(var(--bs-body-color-rgb));
+}
+.link-white:active {
+  color: rgb(var(--bs-body-color-rgb));
+}
 @media (max-width: 991px) {  /* Replace with your desired breakpoint */
   #offcanvasBody {
     display: flex;

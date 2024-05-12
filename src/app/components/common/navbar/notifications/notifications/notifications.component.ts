@@ -12,6 +12,7 @@ import {AlertService} from "../../../../../services/common/alert/alert.service";
 export class NotificationsComponent implements OnInit {
 
   connectionRequests = new BehaviorSubject<ConnectionRequest[]>([])
+  notificationContainerVisible = false
 
   constructor(
     private connectionService: ConnectionService,
@@ -21,6 +22,14 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
     this.getConnectionRequests().then()
+  }
+
+  toggleNotificationContainer() {
+    this.notificationContainerVisible = !this.notificationContainerVisible
+  }
+
+  getNotificationContainerVisibility() {
+    return this.notificationContainerVisible ? 'block' : 'none'
   }
 
   async getConnectionRequests() {
