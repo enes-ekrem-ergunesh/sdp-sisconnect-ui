@@ -4,6 +4,7 @@ import {NavbarComponent} from "../../../../components/common/navbar/navbar/navba
 import {ProfileDropdownModule} from "../profile-dropdown/profile-dropdown/profile-dropdown.module";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {SearchModule} from "../search/search.module";
+import {NotificationsModule} from "../notifications/notifications/notifications.module";
 
 
 
@@ -15,7 +16,8 @@ import {SearchModule} from "../search/search.module";
         ProfileDropdownModule,
         RouterLink,
         RouterLinkActive,
-        SearchModule
+        SearchModule,
+        NotificationsModule
     ]
 })
 export class NavbarModule { }

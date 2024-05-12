@@ -1,4 +1,4 @@
-.search-container {
+@mixin search-container-expanded {
   position: absolute;
   top: 110%;
   border: 2px solid #2b2b31;
@@ -7,6 +7,27 @@
   padding: 10px;
   background-color: #2b2b31;
 }
+
+@mixin search-container-collapsed {
+  position: absolute;
+  top: 133px;
+  border: 2px solid #2b2b31;
+  border-radius: 10px;
+  width: 350px;
+  padding: 10px;
+  background-color: #2b2b31;
+}
+
+.search-container {
+  @media (min-width: 992px) {
+    @include search-container-expanded;
+  }
+
+  @media (max-width: 991px) {
+    @include search-container-collapsed;
+  }
+}
+
 
 .search-item {
   display: flex;

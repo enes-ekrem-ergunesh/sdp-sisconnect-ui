@@ -20,7 +20,7 @@ export class ConfigService {
     private router: Router,
   ) {
     if (environment.production) {
-      // declare apiUrl for production environment
+      this.apiUrl = environment.sisConnectApiUrl
     } else {
       this.onDev()
     }

@@ -23,10 +23,11 @@
         </a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body">
-        <app-search class="d-flex mx-auto"></app-search>
+      <div id="offcanvasBody" class="offcanvas-body">
+        <app-search class="d-flex mx-auto order-first"></app-search>
+        <app-notifications class="order-last mt-3 mt-lg-0 order-lg-1"></app-notifications>
         <!--Profile Links-->
-        <ul class="navbar-nav justify-content-end flex-grow-1 ps-1 mt-3 d-lg-none">
+        <ul class="navbar-nav ps-1 mt-3 d-lg-none order-2">
           <li class="nav-item">
             <a class="nav-link" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-gear-fill"
@@ -38,7 +39,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <button class="nav-link">
+            <button class="nav-link" (click)="logout()">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                    class="bi bi-box-arrow-right" viewBox="0 0 18 18">
                 <path fill-rule="evenodd"
@@ -50,7 +51,7 @@
             </button>
           </li>
         </ul>
-        <app-profile-dropdown class="d-none d-lg-block ms-2 pt-1"></app-profile-dropdown>
+        <app-profile-dropdown class="d-none d-lg-block ms-2 pt-1 order-3"></app-profile-dropdown>
       </div>
     </div>
   </div>

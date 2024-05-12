@@ -31,6 +31,10 @@ export class NavbarComponent  implements OnInit {
     await this.getUser();
   }
 
+  async logout() {
+    (await this.userService.logout())
+  }
+
   async getUser() {
     (await this.userService.getUser()).subscribe((user) => {
       this.user = user;

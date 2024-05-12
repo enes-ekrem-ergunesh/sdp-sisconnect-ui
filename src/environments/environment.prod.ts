@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   sisConnectApiExternalUrl: '',
-  sisConnectApiUrl: ''
+  sisConnectApiUrl: 'https://enesekremergunesh.me'
 };

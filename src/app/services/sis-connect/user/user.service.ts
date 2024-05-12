@@ -96,7 +96,7 @@ export class UserService {
     let id = 0;
     this.profilePageRouteParams.subscribe((params) => {
       id = <number>params['username'].split('_')[1];
-    console.log("user service > getUserById > id: ", params['username'].split('_')[1])
+    // console.log("user service > getUserById > id: ", params['username'].split('_')[1])
     });
     return this.http.get<User>(
       this.configService.getApiUrl() + '/user/' + id,

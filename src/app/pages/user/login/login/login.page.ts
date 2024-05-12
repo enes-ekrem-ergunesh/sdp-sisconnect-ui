@@ -16,14 +16,14 @@ export class LoginPage implements OnInit {
   url = ''
   loginForm = new FormGroup({
     email: new FormControl(
-      '2312enes@sis.edu.eg',
+      '',
       [
         Validators.required,
         Validators.email
       ]
     ),
     password: new FormControl(
-      'ewq123',
+      '',
       [
         Validators.required,
       ]

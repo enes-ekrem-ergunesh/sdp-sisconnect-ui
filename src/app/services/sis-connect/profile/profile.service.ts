@@ -8,7 +8,7 @@ import {AlertService} from "../../common/alert/alert.service";
 import {BasicHttpResponse} from "../../../interfaces/sis-connect/basic-http-response/basic-http-response";
 import {ProfileAboutFieldType} from "../../../interfaces/profile/profile-about-field-type";
 import {User} from "../../../interfaces/sis-connect/user/user";
-import {Params, Router} from "@angular/router";
+import {Params} from "@angular/router";
 import {UserService} from "../user/user.service";
 
 @Injectable({
@@ -32,7 +32,6 @@ export class ProfileService {
     private storageService: StorageService,
     private alertService: AlertService,
     private userService: UserService,
-    private router: Router,
   ) {
   }
 
@@ -40,7 +39,7 @@ export class ProfileService {
   async getProfileId() {
     let username = ''
     this.profilePageRouteParams.subscribe((params) => {
-      console.log('profile service get profile id: ', params['username'])
+      // console.log('profile service get profile id: ', params['username'])
       username = params['username']
     })
     return this.http.get<{ "id": number }>(
@@ -222,7 +221,7 @@ export class ProfileService {
     let isProfileOwned = new BehaviorSubject(false)
     this.profilePageRouteParams.subscribe(async (params) => {
       (await this.userService.getUser()).subscribe((user) => {
-        console.log('isProfileOwned', params['username'].split('_')[1], user.id.toString())
+        // console.log('isProfileOwned', params['username'].split('_')[1], user.id.toString())
         if (params['username'].split('_')[1] === user.id.toString()){
           isProfileOwned.next(true)
         }

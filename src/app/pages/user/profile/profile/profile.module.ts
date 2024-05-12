@@ -11,18 +11,20 @@ import {NavbarModule} from "../../../../modules/common/navbar/navbar/navbar.modu
 import {UpperProfileModule} from "../../../../modules/profile/upper-profile/upper-profile.module";
 import {ProfileUserInfoModule} from "../../../../modules/profile/profile-user-info/profile-user-info.module";
 import {AlertModule} from "../../../../modules/common/alert/alert/alert.module";
+import {ProfileTabsModule} from "../../../../modules/profile/profile-tabs/profile-tabs/profile-tabs.module";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        ProfilePageRoutingModule,
-        NavbarModule,
-        UpperProfileModule,
-        ProfileUserInfoModule,
-        AlertModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ProfilePageRoutingModule,
+    NavbarModule,
+    UpperProfileModule,
+    ProfileUserInfoModule,
+    AlertModule,
+    ProfileTabsModule,
+  ],
   declarations: [ProfilePage]
 })
 export class ProfilePageModule {}
