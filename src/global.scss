@@ -28,10 +28,12 @@
 /* Bootstrap CSS */
 @import "node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-/* Tabs */
-.example-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+.input-hide-caret {
+  color: transparent !important;
+  text-shadow: 0 0 rgb(38, 38, 38);
+}
+@media (prefers-color-scheme: dark) {
+  .input-hide-caret {
+    text-shadow: 0 0 rgb(219, 219, 219);
+  }
 }
