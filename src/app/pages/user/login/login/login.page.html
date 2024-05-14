@@ -5,8 +5,10 @@
 
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <img class="mb-4" ngSrc="assets/sisConnectLogo.webp" alt="" width="91" height="100" priority>
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <div class="text-center pe-3">
+        <img class="mb-3" ngSrc="assets/sisconnect-logo.png" alt="" width="150" height="150" priority>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      </div>
 
       <div class="form-floating">
         <input type="email" class="form-control" id="input-email" placeholder="name@example.com"
