@@ -27,3 +27,11 @@
 
 /* Bootstrap CSS */
 @import "node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+/* Tabs */
+.example-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

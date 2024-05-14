@@ -9,10 +9,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from "@angular/common/http";
 
 import {IonicStorageModule} from '@ionic/storage-angular';
+import {TabsModule} from "./ui/common/tabs/tabs.module";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), TabsModule],
   exports: [],
   providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     importProvidersFrom(HttpClientModule)
