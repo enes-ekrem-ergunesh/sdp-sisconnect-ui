@@ -8,6 +8,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import {CustomIonSearchbarModule} from "../common/custom-ion-searchbar/custom-ion-searchbar.module";
+import {UpperProfileComponent} from "./components/upper-profile/upper-profile.component";
 
 @NgModule({
     imports: [
@@ -17,6 +18,6 @@ import {CustomIonSearchbarModule} from "../common/custom-ion-searchbar/custom-io
         ProfilePageRoutingModule,
         CustomIonSearchbarModule
     ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage, UpperProfileComponent]
 })
 export class ProfilePageModule {}
