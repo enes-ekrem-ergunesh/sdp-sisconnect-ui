@@ -1,11 +1,13 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons class="toolbar-start-button" slot="start">
       <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
     <app-custom-ion-searchbar routerLink="/search"></app-custom-ion-searchbar>
     <ion-buttons slot="end">
-      <ion-icon name="chatbubble-ellipses" size="large"></ion-icon>
+      <ion-button routerLink="/messages">
+        <ion-icon name="chatbubble-ellipses" size="large"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

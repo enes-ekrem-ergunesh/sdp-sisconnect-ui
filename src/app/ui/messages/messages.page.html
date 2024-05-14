@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>messages</ion-title>
+    <ion-buttons class="toolbar-start-button" slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <app-custom-ion-searchbar routerLink="/search"></app-custom-ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
