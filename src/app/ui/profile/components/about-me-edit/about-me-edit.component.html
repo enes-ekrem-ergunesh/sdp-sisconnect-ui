@@ -1,0 +1,16 @@
+<ion-list id="present-alert" class="mt-2 p-0">
+  <ion-item class="align-items-start" *ngFor="let a of [1, 2, 3]">
+    <ion-label class="about-me-field-label no-pointer">Address:</ion-label>
+    <div class="d-flex align-items-center w-100 me-2 px-1 hover-button">
+      <ion-input class="no-pointer" type="date"></ion-input>
+    </div>
+    <ion-icon class="ms-auto my-auto delete-icon" name="remove-circle-outline" size="large"></ion-icon>
+  </ion-item>
+</ion-list>
+
+<ion-alert
+  trigger="present-alert"
+  header="A Short Title Is Best"
+  subHeader="A Sub Header Is Optional"
+  message="A message should be a short, complete sentence."
+></ion-alert>

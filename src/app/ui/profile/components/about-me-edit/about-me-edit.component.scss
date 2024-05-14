@@ -1,0 +1,27 @@
+@import "../about-me/about-me.component";
+
+.hover-button {
+  filter: brightness(0.7);
+  border-radius: 5px;
+}
+
+.hover-button:hover {
+  filter: brightness(2);
+  background-color: rgba(var(--bs-body-color-rgb), .08);
+  cursor: pointer !important;
+}
+
+.no-pointer{
+  pointer-events: none;
+}
+
+.delete-icon:hover {
+  filter: brightness(150%);
+  cursor: pointer;
+  color: #ff0000;
+  border-radius: 5px;
+}
+.delete-icon {
+  color: rgba(255, 0, 0, 0.57);
+  padding-bottom: 4px;
+}

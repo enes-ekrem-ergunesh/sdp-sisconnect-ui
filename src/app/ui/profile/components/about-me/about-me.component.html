@@ -1,0 +1,30 @@
+<div class="d-flex">
+  <ion-label class="mt-1 ms-3 fs-4">About me</ion-label>
+  <ion-buttons class="ms-auto">
+    <ion-button (click)="setOpen(true)">
+      <ion-icon name="create" size="large"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</div>
+<ion-list class="mt-2 p-0">
+  <ion-item class="align-items-start" *ngFor="let a of [1, 2, 3]">
+    <ion-label class="about-me-field-label">Address:</ion-label>
+    <ion-label>Francuske Revolucije BB</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-modal [isOpen]="(isModalOpen | async) || false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>About me</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false)">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <app-about-me-edit></app-about-me-edit>
+    </ion-content>
+  </ng-template>
+</ion-modal>
