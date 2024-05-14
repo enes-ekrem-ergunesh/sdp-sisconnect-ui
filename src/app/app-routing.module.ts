@@ -25,6 +25,26 @@ const routes: Routes = [
         loadChildren: () => import('./ui/notifications/notifications.module').then((m) => m.NotificationsPageModule),
       },
     ]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./ui/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./ui/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'messages',
+    loadChildren: () => import('./ui/messages/messages.module').then( m => m.MessagesPageModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./ui/search/search.module').then( m => m.SearchPageModule)
+  },
+  {
+    path: 'message',
+    loadChildren: () => import('./ui/message/message.module').then( m => m.MessagePageModule)
   }
 ];
 
