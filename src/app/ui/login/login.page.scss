@@ -1,0 +1,12 @@
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Optional, if you want the element to fill the entire height of ion-content */
+}
+
+.login-form-width {
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 1rem;
+}
