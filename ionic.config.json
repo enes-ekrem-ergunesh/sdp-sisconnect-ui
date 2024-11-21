@@ -1,0 +1,7 @@
+{
+  "name": "sdp-sisconnect-ui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
