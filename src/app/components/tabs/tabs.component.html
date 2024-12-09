@@ -1,0 +1,59 @@
+<ion-tabs>
+  <ion-tab tab="home">
+    <div id="home-page" class="h-100">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ logo }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="content-container">
+          <app-home-content></app-home-content>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="chat">
+    <div id="chat-page" class="h-100">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ logo }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="content-container">
+          <app-chat-content></app-chat-content>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="profile">
+    <div id="profile-page" class="h-100">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ logo }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="content-container">
+          <app-profile-content></app-profile-content>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="home"></ion-icon>
+      Home
+    </ion-tab-button>
+    <ion-tab-button tab="chat">
+      <ion-icon name="chatbubble-ellipses"></ion-icon>
+      Chat
+    </ion-tab-button>
+    <ion-tab-button tab="profile">
+      <ion-icon name="person"></ion-icon>
+      Profile
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

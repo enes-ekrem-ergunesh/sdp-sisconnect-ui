@@ -1,0 +1,24 @@
+@import "/src/styles/shared.scss";
+
+.bs-show-hide-password-button {
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  right: 0.3rem;
+  padding: 0.7rem !important;
+  padding-top: 1rem !important;
+}
+
+.ion-show-hide-password-button {
+  padding: 0.4rem !important;
+}
+
+#tooltip {
+  /* Float on top of the UI */
+  position: absolute;
+
+  /* Avoid layout interference */
+  width: max-content;
+  top: 0;
+  left: 0;
+}

@@ -1,0 +1,144 @@
+<div *ngIf="isIonic(); else desktopForm">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-input
+          fill="outline"
+          labelPlacement="floating"
+          class="floating-label-input"
+
+          id="email-ion-input"
+          label="Email"
+          placeholder="Enter email here"
+          formControlName="email"
+          type="email"
+          [errorText]="get_error('email')"
+
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          fill="outline"
+          labelPlacement="floating"
+          class="floating-label-input"
+          (ionInput)="showHidePasswordButtonStyle()"
+
+          id="password-ion-input"
+          label="Password"
+          placeholder="Enter password here"
+          formControlName="password"
+          [type]="passwordInputType"
+          [errorText]="get_error('password')"
+          [clearOnEdit]="false"
+        >
+        </ion-input>
+        <ion-button id="show-hide-password-button" class="show-hide-password-button ion-show-hide-password-button" fill="clear" slot="end"
+                    aria-label="Show/hide" (click)="showHidePassword()" [style]="showHidePasswordButtonStyle()"
+        >
+          <ion-icon slot="icon-only" [name]="showHidePasswordIcon" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-checkbox
+          labelPlacement="end"
+          justify="start"
+
+          formControlName="remember_me"
+        >Remember me
+        </ion-checkbox>
+      </ion-item>
+
+      <div (click)="presentPopover($event)">
+        <ion-button type="submit" size="block" class="block-button" [disabled]="!loginForm.valid">
+          Submit
+        </ion-button>
+      </div>
+
+    </ion-list>
+  </form>
+</div>
+
+<ng-template #desktopForm>
+  <form id="bs-login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+    <div class="form-floating mb-3">
+      <input
+        class="form-control"
+
+        id="email-bs-input"
+        placeholder="Enter email here"
+        formControlName="email"
+        type="email"
+        pattern="[a-z0-9._%+\-]+@sis\.edu\.eg$"
+        required
+      >
+      <label for="email-bs-input">Email</label>
+      <div class="invalid-feedback">
+        {{ get_error('email') }}
+      </div>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        class="form-control"
+
+        id="password-bs-input"
+        placeholder="Enter password here"
+        formControlName="password"
+        [type]="passwordInputType"
+        required
+      >
+      <label for="password-bs-input">Password</label>
+      <div class="invalid-feedback">
+        {{ get_error('password') }}
+      </div>
+      <button
+        id="bs-show-hide-password-button"
+        class="show-hide-password-button bs-show-hide-password-button"
+        slot="end"
+        aria-label="Show/hide"
+        (click)="showHidePassword()"
+        [style]="showHidePasswordButtonStyle()"
+        type="button"
+      >
+        <ion-icon slot="icon-only" [name]="showHidePasswordIcon" aria-hidden="true"></ion-icon>
+      </button>
+    </div>
+
+    <div class="form-floating mb-3">
+      <div class="form-check">
+        <input
+          id="bs-remember-me-checkbox"
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          formControlName="remember_me"
+        >
+        <label class="form-check-label" for="bs-remember-me-checkbox">
+          Remember me
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <button
+        id="bs-submit-button"
+        class="btn btn-primary w-100"
+      >
+        Submit
+      </button>
+    </div>
+
+
+  </form>
+</ng-template>
+
+
+<ion-popover #popover [isOpen]="isPopoverOpen" (didDismiss)="isPopoverOpen = false"
+             side="bottom" alignment="center"
+>
+  <ng-template>
+    <ion-content class="ion-padding ion-text-center">Complete the form to enable the submit button</ion-content>
+  </ng-template>
+</ion-popover>
