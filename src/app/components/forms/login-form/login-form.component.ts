@@ -15,6 +15,7 @@ import {eye, eyeOff} from "ionicons/icons";
 import {AuthService} from "../../../services/auth/auth.service";
 import {PlatformService} from "../../../services/platform/platform.service";
 import {NgIf} from "@angular/common";
+import {SocialLogin} from "@capgo/capacitor-social-login";
 
 @Component({
   selector: 'app-login-form',
@@ -111,6 +112,21 @@ export class LoginFormComponent {
     const cssObj = window.getComputedStyle(element, null);
     const right = cssObj.getPropertyValue('right')
     element.style['right'] = (parseInt(right) + 17) + 'px'
+  }
+
+  async onGoogleLogin() {
+    await SocialLogin.initialize({
+      google: {
+        webClientId: '79123379615-32p4ij8740n13t2bu00nbn7jpcg86101.apps.googleusercontent.com',
+      },
+    });
+    const res = await SocialLogin.login({
+      provider: 'google',
+      options: {
+        scopes: ['email', 'profile'],
+      },
+    });
+    console.log(res)
   }
 
   isIonic() {

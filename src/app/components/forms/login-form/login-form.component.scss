@@ -22,3 +22,14 @@
   top: 0;
   left: 0;
 }
+
+.social-login-button{
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.social-login-button:hover{
+  color: brown;
+}

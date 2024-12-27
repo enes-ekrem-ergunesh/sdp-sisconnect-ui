@@ -1,0 +1,12 @@
+.iframe-mask {
+  position: absolute;
+  z-index: 100;
+  margin-left: 117px;
+  margin-top: -2px;
+  width: 64px;
+  height: 44px;
+  background-color: rgb(33, 37, 41);
+  /* -webkit-mask: radial-gradient(circle, transparent 50px, black 51px); */
+  mask: radial-gradient(circle, transparent 19px, black 20px); /* Create a hole */
+  pointer-events: none;
+}

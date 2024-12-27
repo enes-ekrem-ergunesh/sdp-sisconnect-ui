@@ -28,6 +28,7 @@
     "@capacitor/haptics": "6.0.2",
     "@capacitor/keyboard": "6.0.3",
     "@capacitor/status-bar": "6.0.2",
+    "@capgo/capacitor-social-login": "^0.0.81",
     "@floating-ui/dom": "^1.6.12",
     "@ionic/angular": "^8.0.0",
     "@ionic/storage-angular": "^4.0.0",

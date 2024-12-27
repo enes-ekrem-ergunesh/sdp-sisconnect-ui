@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {LoginFormComponent} from "../../forms/login-form/login-form.component";
 import {LoginForm} from "../../../interfaces/login-form";
 import {FormGroup} from "@angular/forms";
@@ -9,6 +9,7 @@ import {TokenInfo} from "../../../interfaces/token-info";
 import {catchError} from "rxjs";
 import {ConfigService} from "../../../services/config/config.service";
 import {Router} from "@angular/router";
+import {GoogleLoginPostValue} from "../../../interfaces/google-login-post-value";
 
 @Component({
   selector: 'app-login-content',
@@ -25,11 +26,36 @@ export class LoginContentComponent implements OnInit {
     private authService: AuthService,
     private storageService: StorageService,
     private configService: ConfigService,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2,
+    private el: ElementRef
   ) {
   }
 
   ngOnInit() {
+
+    // @ts-ignore
+    google.accounts.id.initialize({
+      client_id: "79123379615-32p4ij8740n13t2bu00nbn7jpcg86101.apps.googleusercontent.com",
+      callback: this.googleWebLogin.bind(this),
+      auto_select: false,
+      cancel_on_tap_outside: true,
+
+    });
+    // @ts-ignore
+    google.accounts.id.renderButton(
+      document.getElementById("google-button"),
+      {
+        type: "icon",
+        theme: "filled_black",
+        size: "large",
+        shape: "pill",
+        width: "100%"
+      }
+    );
+    // @ts-ignore
+    google.accounts.id.prompt((notification: PromptMomentNotification) => {
+    });
     return
   }
 
@@ -56,5 +82,31 @@ export class LoginContentComponent implements OnInit {
       })
 
   }
+
+  googleWebLogin(response: any) {
+    console.log("Google Login Content:", response)
+    this.googleLogin(response.credential)
+  }
+
+  googleLogin(token:string){
+    const googleLoginPostValue: GoogleLoginPostValue = {
+      id_token: token
+    }
+
+    this.authService.googleLogin(googleLoginPostValue)
+      .pipe(
+        catchError(async (error) => {
+          this.configService.handleError(error, "Google Login Error")
+          throw error
+        })
+      )
+      .subscribe(response => {
+        const res = response as TokenInfo
+        console.log(res.token)
+        this.storageService.set('token', res.token)
+        this.router.navigate(['/']).then()
+      })
+  }
+
 
 }

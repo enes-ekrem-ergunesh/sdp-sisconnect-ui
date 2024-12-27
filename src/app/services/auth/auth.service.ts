@@ -7,6 +7,7 @@ import {catchError, retry} from "rxjs";
 import {FormGroup} from "@angular/forms";
 import {LoginFormValue} from "../../interfaces/login-form-value";
 import {ConfigService} from "../config/config.service";
+import {GoogleLoginPostValue} from "../../interfaces/google-login-post-value";
 
 
 @Injectable({
@@ -24,6 +25,10 @@ export class AuthService {
 
   emailPasswordLogin(loginFormValue: LoginFormValue) {
     return this.http.post(this.api_url + '/authentication/', loginFormValue);
+  }
+
+  googleLogin(token: GoogleLoginPostValue){
+    return this.http.post(this.api_url + '/authentication/google', token);
   }
 
   async verifyToken() {
