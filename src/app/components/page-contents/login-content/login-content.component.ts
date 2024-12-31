@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LoginFormComponent} from "../../forms/login-form/login-form.component";
 import {LoginForm} from "../../../interfaces/login-form";
 import {FormGroup} from "@angular/forms";
@@ -10,29 +10,31 @@ import {catchError} from "rxjs";
 import {ConfigService} from "../../../services/config/config.service";
 import {Router} from "@angular/router";
 import {GoogleLoginPostValue} from "../../../interfaces/google-login-post-value";
+import {PlatformService} from "../../../services/platform/platform.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-login-content',
   templateUrl: './login-content.component.html',
   styleUrls: ['./login-content.component.scss'],
   imports: [
-    LoginFormComponent
+    LoginFormComponent,
+    NgIf
   ],
   standalone: true
 })
-export class LoginContentComponent implements OnInit {
+export class LoginContentComponent implements AfterViewInit {
 
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
     private configService: ConfigService,
     private router: Router,
-    private renderer: Renderer2,
-    private el: ElementRef
+    private platformService: PlatformService
   ) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
 
     // @ts-ignore
     google.accounts.id.initialize({
@@ -106,6 +108,10 @@ export class LoginContentComponent implements OnInit {
         this.storageService.set('token', res.token)
         this.router.navigate(['/']).then()
       })
+  }
+
+  isIonic() {
+    return this.platformService.isMobile()
   }
 
 
