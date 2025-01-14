@@ -34,7 +34,7 @@ export class LoginContentComponent implements AfterViewInit {
   ) {
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     if (this.isIonic() && !this.isMobileWeb()) {
       return
     }
@@ -61,9 +61,14 @@ export class LoginContentComponent implements AfterViewInit {
     google.accounts.id.prompt((notification: PromptMomentNotification) => {
     });
 
-    setTimeout(() => {this.centerMask()}, 500)
-    setTimeout(() => {this.centerMask()}, 1000)
-    setTimeout(() => {this.centerMask()}, 1500)
+    setTimeout(() => {
+      this.centerMask()
+    }, 500)
+    addEventListener("orientationchange", () => {
+      setTimeout(() => {
+        this.centerMask()
+      }, 10)
+    })
   }
 
   emailPasswordLogin(loginForm: FormGroup<LoginForm>) {
@@ -85,7 +90,7 @@ export class LoginContentComponent implements AfterViewInit {
         const res = response as TokenInfo
         console.log(res.token)
         this.storageService.set('token', res.token)
-        this.router.navigate(['/']).then()
+        this.router.navigate(['/'], {replaceUrl: true}).then()
       })
 
   }
@@ -111,7 +116,7 @@ export class LoginContentComponent implements AfterViewInit {
         const res = response as TokenInfo
         console.log(res.token)
         this.storageService.set('token', res.token)
-        this.router.navigate(['/']).then()
+        this.router.navigate(['/'], {replaceUrl: true}).then()
       })
   }
 
@@ -131,7 +136,6 @@ export class LoginContentComponent implements AfterViewInit {
       - (ionMask.offsetWidth / 2) + "px"
     ionMask.style.top = (googleButton.offsetTop + googleButton.offsetHeight / 2)
       - (ionMask.offsetHeight / 2) + "px"
-
   }
 
 }
