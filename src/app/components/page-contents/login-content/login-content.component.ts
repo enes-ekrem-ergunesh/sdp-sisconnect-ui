@@ -35,7 +35,9 @@ export class LoginContentComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-
+    if (this.isIonic() && !this.isMobileWeb()) {
+      return
+    }
     // @ts-ignore
     google.accounts.id.initialize({
       client_id: "79123379615-32p4ij8740n13t2bu00nbn7jpcg86101.apps.googleusercontent.com",
@@ -58,7 +60,10 @@ export class LoginContentComponent implements AfterViewInit {
     // @ts-ignore
     google.accounts.id.prompt((notification: PromptMomentNotification) => {
     });
-    return
+
+    setTimeout(() => {this.centerMask()}, 500)
+    setTimeout(() => {this.centerMask()}, 1000)
+    setTimeout(() => {this.centerMask()}, 1500)
   }
 
   emailPasswordLogin(loginForm: FormGroup<LoginForm>) {
@@ -90,7 +95,7 @@ export class LoginContentComponent implements AfterViewInit {
     this.googleLogin(response.credential)
   }
 
-  googleLogin(token:string){
+  googleLogin(token: string) {
     const googleLoginPostValue: GoogleLoginPostValue = {
       id_token: token
     }
@@ -114,5 +119,19 @@ export class LoginContentComponent implements AfterViewInit {
     return this.platformService.isMobile()
   }
 
+  isMobileWeb() {
+    return this.platformService.isMobileWeb()
+  }
+
+  centerMask() {
+    const googleButton = document.getElementById("google-button")
+    const ionMask = document.getElementById("ion-mask")
+    if (googleButton == null || ionMask == null) return
+    ionMask.style.left = (googleButton.offsetLeft + googleButton.offsetWidth / 2)
+      - (ionMask.offsetWidth / 2) + "px"
+    ionMask.style.top = (googleButton.offsetTop + googleButton.offsetHeight / 2)
+      - (ionMask.offsetHeight / 2) + "px"
+
+  }
 
 }

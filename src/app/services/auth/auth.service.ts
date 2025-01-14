@@ -6,8 +6,8 @@ import {StorageService} from "../storage/storage.service";
 import {catchError, retry} from "rxjs";
 import {FormGroup} from "@angular/forms";
 import {LoginFormValue} from "../../interfaces/login-form-value";
-import {ConfigService} from "../config/config.service";
 import {GoogleLoginPostValue} from "../../interfaces/google-login-post-value";
+import {SocialLogin} from "@capgo/capacitor-social-login";
 
 
 @Injectable({
@@ -70,8 +70,19 @@ export class AuthService {
               throw error
             })
           )
-          .subscribe((response) => {
+          .subscribe(async (response) => {
             console.info(response)
+            try {
+              await SocialLogin.initialize({
+                google: {
+                  webClientId: '79123379615-32p4ij8740n13t2bu00nbn7jpcg86101.apps.googleusercontent.com', // the web client id for Android and Web
+                },
+              });
+              await SocialLogin.logout({provider: 'google'})
+              console.info('SocialLogin Google logout success by logout()')
+            } catch (e) {
+              console.error(e)
+            }
           })
       })
     this.storageService.remove('token')

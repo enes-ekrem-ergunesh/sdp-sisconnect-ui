@@ -57,7 +57,7 @@
         </ion-button>
       </div>
 
-      <div id="social-login-container" class="mt-3 d-flex">
+      <div *ngIf="!isMobileWeb()" id="social-login-container" class="mt-3 d-flex">
         <div class="social-login-button mx-auto" (click)="onGoogleLogin()">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-google"
                viewBox="0 0 16 16">

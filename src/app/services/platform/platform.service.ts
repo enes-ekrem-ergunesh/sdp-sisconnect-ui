@@ -14,6 +14,10 @@ export class PlatformService {
     return this.platform.is('mobile');
   }
 
+  isMobileWeb(): boolean {
+    return this.platform.is('mobileweb');
+  }
+
   isDesktop(): boolean {
     return this.platform.is('desktop');
   }
@@ -36,6 +40,10 @@ export class PlatformService {
     } else {
       return 'unknown';
     }
+  }
+
+  getPlatformAdvanced(): string {
+    return this.platform.platforms().join(', ');
   }
 
 

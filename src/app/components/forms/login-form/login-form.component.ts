@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {
   IonButton,
@@ -38,6 +38,7 @@ import {SocialLogin} from "@capgo/capacitor-social-login";
 export class LoginFormComponent {
   @ViewChild('popover') popover: any;
   @Output() loginFormEmitter = new EventEmitter<FormGroup>();
+  @Output() googleLoginEmitter = new EventEmitter<string>();
 
   isPopoverOpen = false;
   passwordInputType = 'password';
@@ -127,10 +128,15 @@ export class LoginFormComponent {
       },
     });
     console.log(res)
+    if (res.result.idToken) this.googleLoginEmitter.emit(res.result.idToken)
   }
 
   isIonic() {
     return this.platformService.isMobile()
+  }
+
+  isMobileWeb() {
+    return this.platformService.isMobileWeb()
   }
 
 }

@@ -1,4 +1,4 @@
-.iframe-mask {
+.iframe-mask-bs {
   position: absolute;
   z-index: 100;
   margin-left: 117px;
@@ -9,4 +9,28 @@
   /* -webkit-mask: radial-gradient(circle, transparent 50px, black 51px); */
   mask: radial-gradient(circle, transparent 19px, black 20px); /* Create a hole */
   pointer-events: none;
+  visibility: hidden;
+}
+
+.iframe-mask-ion {
+  position: absolute;
+  z-index: 100;
+  top: 1000px;
+  width: 66px;
+  height: 46px;
+  background-color: rgb(18, 18, 18);
+  /* -webkit-mask: radial-gradient(circle, transparent 50px, black 51px); */
+  mask: radial-gradient(circle, transparent 17px, black 20px); /* Create a hole */
+  pointer-events: none;
+  visibility: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .iframe-mask-bs {
+    visibility: visible;
+  }
+
+  .iframe-mask-ion {
+    visibility: visible;
+  }
 }
