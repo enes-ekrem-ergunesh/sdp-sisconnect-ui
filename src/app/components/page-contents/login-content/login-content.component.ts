@@ -134,7 +134,7 @@ export class LoginContentComponent implements AfterViewInit {
   centerMask() {
     const googleButton = document.getElementById("google-button")
     const ionMask = document.getElementById("ion-mask")
-    const toolbarHeight = 56
+    const toolbarHeight = this.platformService.isIos() ? 44 : 56
     if (googleButton == null || ionMask == null) return
     ionMask.style.left = (googleButton.offsetLeft + googleButton.offsetWidth / 2)
       - (ionMask.offsetWidth / 2) + "px"

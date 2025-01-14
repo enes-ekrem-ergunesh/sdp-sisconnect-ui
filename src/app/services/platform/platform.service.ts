@@ -14,6 +14,10 @@ export class PlatformService {
     return this.platform.is('mobile');
   }
 
+  isIos(): boolean {
+    return this.platform.is('ios');
+  }
+
   isMobileWeb(): boolean {
     return this.platform.is('mobileweb');
   }
