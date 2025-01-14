@@ -1,4 +1,5 @@
-<app-login-form (loginFormEmitter)="emailPasswordLogin($event)" (googleLoginEmitter)="googleLogin($event)"></app-login-form>
+<app-login-form (loginFormEmitter)="emailPasswordLogin($event)"
+                (googleLoginEmitter)="googleLogin($event)"></app-login-form>
 
 <div *ngIf="isIonic() && !isMobileWeb(); else desktop">
 </div>

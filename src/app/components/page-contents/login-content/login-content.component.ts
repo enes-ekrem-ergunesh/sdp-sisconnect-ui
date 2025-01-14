@@ -63,6 +63,9 @@ export class LoginContentComponent implements AfterViewInit {
 
     setTimeout(() => {
       this.centerMask()
+    }, 10)
+    setTimeout(() => {
+      this.centerMask()
     }, 500)
     addEventListener("orientationchange", () => {
       setTimeout(() => {
@@ -131,10 +134,11 @@ export class LoginContentComponent implements AfterViewInit {
   centerMask() {
     const googleButton = document.getElementById("google-button")
     const ionMask = document.getElementById("ion-mask")
+    const toolbarHeight = 56
     if (googleButton == null || ionMask == null) return
     ionMask.style.left = (googleButton.offsetLeft + googleButton.offsetWidth / 2)
       - (ionMask.offsetWidth / 2) + "px"
-    ionMask.style.top = (googleButton.offsetTop + googleButton.offsetHeight / 2)
+    ionMask.style.top = (toolbarHeight + googleButton.offsetTop + googleButton.offsetHeight / 2)
       - (ionMask.offsetHeight / 2) + "px"
   }
 
