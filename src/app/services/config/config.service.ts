@@ -20,6 +20,7 @@ export class ConfigService {
   handleError(error: any, header: string = 'Unknown Error') {
     if (error.status === 401) {
       let redirect_message = ', you will be redirected to login page.';
+      header = 'Authentication Error';
       if(this.router.url === '/login-web' || this.router.url === '/login-mobile')
         redirect_message = '';
       this.globalAlert(header, (error?.error?.message || 'Unknown Error. Please try again later.') + redirect_message);

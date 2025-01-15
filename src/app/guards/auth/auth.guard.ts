@@ -22,7 +22,7 @@ export const authGuard: CanActivateFn = async () => {
     .pipe(
       catchError(async (error) => {
         configService.handleError(error, 'Authentication Error')
-        throw error
+        return false
       })
     )
     .subscribe( (response) => {
