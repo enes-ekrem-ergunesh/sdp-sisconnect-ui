@@ -1,0 +1,16 @@
+<ion-segment>
+  <ion-segment-button value="posts" content-id="posts">
+    <ion-label>Posts</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="details" content-id="details">
+    <ion-label>Details</ion-label>
+  </ion-segment-button>
+</ion-segment>
+<ion-segment-view>
+  <ion-segment-content id="posts">
+    <app-profile-posts></app-profile-posts>
+  </ion-segment-content>
+  <ion-segment-content id="details">
+    <app-profile-details></app-profile-details>
+  </ion-segment-content>
+</ion-segment-view>
