@@ -17,10 +17,10 @@ export class UserService {
   ) { }
 
   async getCurrentUser() {
-    const headers = await this.authService.getAuthorization()
+    let headers = await this.authService.getAuthorization()
     if (headers.Authorization === null) {
       return this.http.get(this.api_url + '/tokens/')
     }
-    return this.http.get(this.api_url + '/users/self/', {headers: headers});
+    return this.http.get(this.api_url + '/users/self', {headers: headers});
   }
 }

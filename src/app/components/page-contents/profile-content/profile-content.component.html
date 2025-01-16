@@ -2,7 +2,7 @@
   <div class="col">
     <div class="d-flex">
       <div class="mx-auto">
-        <img src="assets/profile-image-placeholder.jpg" width="150" height="150">
+        <img ngSrc="assets/profile-image-placeholder.jpg" width="150" height="150" alt="Profile image">
       </div>
     </div>
   </div>
@@ -11,7 +11,7 @@
   <div class="col">
     <div class="d-flex">
       <div class="mx-auto">
-        <h1>{{ profileInfo.first_name }} {{ profileInfo.last_name }}</h1>
+        <h1>{{ profileInfo.value.first_name }} {{ profileInfo.value.last_name }}</h1>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
   <div class="col">
     <div class="d-flex">
       <div class="mx-auto">
-        <p>{{profileInfo.email}}</p>
+        <p>{{profileInfo.value.email}}</p>
       </div>
     </div>
   </div>
