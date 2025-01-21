@@ -1,3 +1,11 @@
-<p>
-  profile-details works!
-</p>
+<ion-list>
+  <ion-item *ngFor="let i of profile_fields.value;">
+    <ion-label>
+      <h2>{{ i.profile_field_type }}</h2>
+      <ng-container [ngSwitch]="i.profile_field_data_type">
+        <p *ngSwitchCase="'date'" class="fs-6">{{ i.value | date }}</p>
+        <p *ngSwitchDefault class="fs-6">{{ i.value }}</p>
+      </ng-container>
+    </ion-label>
+  </ion-item>
+</ion-list>

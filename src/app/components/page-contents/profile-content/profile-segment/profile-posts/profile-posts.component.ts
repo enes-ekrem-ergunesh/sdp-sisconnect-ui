@@ -10,6 +10,8 @@ export class ProfilePostsComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    return
+  }
 
 }
