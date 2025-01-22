@@ -2,7 +2,7 @@
   <div class="col">
     <div class="d-flex">
       <div class="mx-auto">
-        <img ngSrc="assets/profile-image-placeholder.jpg" width="150" height="150" alt="Profile image">
+        <img ngSrc="assets/profile-image-placeholder.jpg" width="150" height="150" alt="Profile image" priority>
       </div>
     </div>
   </div>
@@ -20,9 +20,16 @@
   <div class="col">
     <div class="d-flex">
       <div class="mx-auto">
-        <p>{{profileInfo.value.email}}</p>
+        <p>{{ profileInfo.value.email }}</p>
       </div>
     </div>
   </div>
 </div>
-<app-profile-segment [profile_fields]="profile_fields"></app-profile-segment>
+
+<div *ngIf="isIonic(); else desktop">
+  <app-profile-segment [profile_fields]="profile_fields"></app-profile-segment>
+</div>
+
+<ng-template #desktop>
+  <ion-button color="danger">Logout</ion-button>
+</ng-template>

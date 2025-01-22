@@ -16,7 +16,7 @@ import {NgOptimizedImage} from "@angular/common";
 export class NavbarComponent  implements OnInit {
   @Input() currentPage = 'home';
 
-  profileImage = 'https://github.com/mdo.png';
+  profileImage = 'assets/profile-image-placeholder.jpg';
 
   constructor() { }
 

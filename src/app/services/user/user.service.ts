@@ -23,4 +23,12 @@ export class UserService {
     }
     return this.http.get(this.api_url + '/users/self', {headers: headers});
   }
+
+  async searchUsers(searchQuery: string) {
+    let headers = await this.authService.getAuthorization()
+    if (headers.Authorization === null) {
+      return this.http.get(this.api_url + '/tokens/')
+    }
+    return this.http.get(this.api_url + '/users/' + searchQuery, {headers: headers});
+  }
 }

@@ -37,4 +37,22 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/login-web/login-web.page').then( m => m.LoginWebPage),
     canActivate: [loginWebGuard]
   },
+  {
+    path: 'search',
+    loadComponent: () => import('./pages/search/search.page').then( m => m.SearchPage)
+  },
+  {
+    path: 'profile',
+    redirectTo: 'profile/0',
+    pathMatch: 'full',
+  },
+  {
+    path: 'profile/:user_id',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage),
+
+  },
+  {
+    path: 'profile-mobile/:user_id',
+    loadComponent: () => import('./pages/profile-mobile/profile-mobile.page').then( m => m.ProfileMobilePage)
+  },
 ];

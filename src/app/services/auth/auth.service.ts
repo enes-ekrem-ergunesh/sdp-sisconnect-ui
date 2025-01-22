@@ -86,7 +86,9 @@ export class AuthService {
           })
       })
     this.storageService.remove('token')
-    this.router.navigate(['/login']).then()
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    })
   }
 
   /* Login & Register */

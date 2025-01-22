@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {addIcons} from "ionicons";
-import {home, chatbubbleEllipses, person} from "ionicons/icons";
+import {home, chatbubbleEllipses, person, search} from "ionicons/icons";
 import {
   IonButton,
+  IonButtons,
   IonContent,
   IonHeader,
-  IonIcon, IonTab,
+  IonIcon, IonSearchbar, IonTab,
   IonTabBar,
   IonTabButton,
   IonTabs,
@@ -16,9 +17,9 @@ import {HomeContentComponent} from "../page-contents/home-content/home-content.c
 import {ChatContentComponent} from "../page-contents/chat-content/chat-content.component";
 import {ProfileContentComponent} from "../page-contents/profile-content/profile-content.component";
 import {UserService} from "../../services/user/user.service";
-import {ProfileService} from "../../services/profile/profile.service";
 import {BehaviorSubject, catchError} from "rxjs";
 import {ConfigService} from "../../services/config/config.service";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-tabs',
@@ -36,21 +37,24 @@ import {ConfigService} from "../../services/config/config.service";
     IonIcon,
     HomeContentComponent,
     ChatContentComponent,
-    ProfileContentComponent
+    ProfileContentComponent,
+    IonSearchbar,
+    IonButtons,
+    IonButton,
+    RouterLink,
+    RouterLinkActive
   ],
   standalone: true
 })
 export class TabsComponent implements OnInit{
   logo = 'Logo'
-  current_user_profile_id = new BehaviorSubject<number>(0)
   current_user_id = new BehaviorSubject<number>(0)
 
   constructor(
     private configService: ConfigService,
     private userService: UserService,
-    private profileService: ProfileService
   ) {
-    addIcons({home, chatbubbleEllipses, person})
+    addIcons({home, chatbubbleEllipses, person, search})
   }
 
   async ngOnInit() {
@@ -68,18 +72,8 @@ export class TabsComponent implements OnInit{
       )
       .subscribe(async (data: any) => {
         this.current_user_id.next(data.id);
-        // Get the current user profile id
-        (await this.profileService.getProfileInfo(data.id))
-          .pipe(
-            catchError(async (error) => {
-              this.configService.handleError(error, "Profile Access Error")
-              throw error
-            })
-          )
-          .subscribe((data: any) => {
-            this.current_user_profile_id.next(data.id);
-          })
       })
   }
 
+  protected readonly window = window;
 }

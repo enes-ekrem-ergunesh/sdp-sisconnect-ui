@@ -4,6 +4,13 @@
       <ion-header>
         <ion-toolbar>
           <ion-title>{{ logo }}</ion-title>
+          <ion-buttons slot="secondary">
+            <ion-button>
+              <a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page" style="color: white">
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+              </a>
+            </ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content>

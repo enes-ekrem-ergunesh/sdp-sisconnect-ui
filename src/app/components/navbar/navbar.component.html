@@ -12,8 +12,8 @@
       </div>
     </form>
     <div class="dropdown text-end">
-      <a href="#" class="d-block link-body-emphasis text-decoration-none">
-        <img [ngSrc]="profileImage" alt="Profile photo" width="32" height="32" class="rounded-circle">
+      <a routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="d-block link-body-emphasis text-decoration-none">
+        <img [ngSrc]="profileImage" alt="Profile photo" width="32" height="32" class="rounded-circle" priority>
       </a>
     </div>
   </div>

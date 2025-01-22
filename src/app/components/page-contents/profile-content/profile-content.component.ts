@@ -4,9 +4,11 @@ import {ProfileInfo} from "../../../interfaces/profile-info";
 import {ProfileSegmentComponent} from "./profile-segment/profile-segment.component";
 import {BehaviorSubject, catchError, retry} from "rxjs";
 import {ConfigService} from "../../../services/config/config.service";
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import {ProfileFieldService} from "../../../services/profile-field/profile-field.service";
 import {ProfileFieldInfo} from "../../../interfaces/profile-field-info";
+import {IonButton} from "@ionic/angular/standalone";
+import {PlatformService} from "../../../services/platform/platform.service";
 
 @Component({
   selector: 'app-profile-content',
@@ -14,7 +16,9 @@ import {ProfileFieldInfo} from "../../../interfaces/profile-field-info";
   styleUrls: ['./profile-content.component.scss'],
   imports: [
     ProfileSegmentComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    IonButton,
+    NgIf
   ],
   standalone: true
 })
@@ -35,7 +39,8 @@ export class ProfileContentComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private profileService: ProfileService,
-    private profileFieldService: ProfileFieldService
+    private profileFieldService: ProfileFieldService,
+    private platformService: PlatformService
   ) {
   }
 
@@ -70,7 +75,11 @@ export class ProfileContentComponent implements OnInit {
         })
 
     })
-
   }
+
+  isIonic() {
+    return this.platformService.isMobile()
+  }
+
 
 }
