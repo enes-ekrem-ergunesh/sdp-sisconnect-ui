@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item *ngFor="let i of searchResults">
+    <ion-item (click)="goToProfile(i.user_id)" *ngFor="let i of searchResults">
       <ion-label class="d-flex align-items-center">
         <img src="assets/profile-image-placeholder.jpg" width="40" height="40">
         <div>

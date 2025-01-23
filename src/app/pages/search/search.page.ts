@@ -14,6 +14,7 @@ import {UserService} from "../../services/user/user.service";
 import {catchError} from "rxjs";
 import {ConfigService} from "../../services/config/config.service";
 import {ProfileInfo} from "../../interfaces/profile-info";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -28,7 +29,8 @@ export class SearchPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -52,6 +54,10 @@ export class SearchPage implements OnInit {
         console.log(data)
         this.searchResults = data as ProfileInfo[]
       })
+  }
+
+  goToProfile(user_id: number) {
+    window.location.href = '/profile/' + user_id
   }
 
 }

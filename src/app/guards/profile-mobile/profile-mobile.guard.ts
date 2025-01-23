@@ -9,12 +9,13 @@ export const profileMobileGuard: CanActivateFn = () => {
   const configService = inject(ConfigService)
 
   let urlParam = window.location.href.split('/').slice(-1)[0];
+  console.log("location: ", window.location.href)
   let userId = 0
   if (!urlParam) urlParam = '0'
   userId = Number(urlParam)
   console.log("userId: ", typeof userId, Number.isNaN(userId))
   if (Number.isNaN(userId)) {
-    configService.handleError(new Error("Profile ID Error"), "Profile Page Error")
+    // configService.handleError(new Error("Profile ID Error"), "Profile Page Error")
     return false
   }
 
