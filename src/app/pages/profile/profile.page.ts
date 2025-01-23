@@ -28,13 +28,11 @@ export class ProfilePage implements OnInit {
   constructor(
     private configService: ConfigService,
     private userService: UserService,
-    private platformService: PlatformService,
     private route: ActivatedRoute
   ) { }
 
   async ngOnInit() {
     const user_id = this.route.snapshot.paramMap.get('user_id');
-    console.log("Profile ID: ", user_id)
 
     if (user_id) {
       if (user_id !== "0") {

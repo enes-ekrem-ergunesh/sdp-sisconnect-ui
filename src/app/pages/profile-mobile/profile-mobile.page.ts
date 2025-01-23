@@ -28,7 +28,6 @@ export class ProfileMobilePage implements OnInit {
 
   async ngOnInit() {
     const user_id = this.route.snapshot.paramMap.get('user_id');
-    console.log("Profile ID: ", user_id)
 
     if (user_id) {
       if (user_id !== "0") {

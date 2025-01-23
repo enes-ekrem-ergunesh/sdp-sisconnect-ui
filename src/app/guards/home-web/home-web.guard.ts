@@ -6,13 +6,11 @@ export const homeWebGuard: CanActivateFn = (route, state) => {
   const platformService = inject(PlatformService)
   const router = inject(Router)
 
-  if (platformService.isWeb()){
+  if (platformService.isWeb()) {
     return true
-  }
-  else if (platformService.isMobile()){
+  } else if (platformService.isMobile()) {
     router.navigate(['/tabs']).then()
-  }
-  else {
+  } else {
     router.navigate(['/home']).then()
   }
 

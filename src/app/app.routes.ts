@@ -5,6 +5,8 @@ import {loginWebGuard} from "./guards/login-web/login-web.guard";
 import {TabsComponent} from "./components/tabs/tabs.component";
 import {tabsMobileGuard} from "./guards/tabs-mobile/tabs-mobile.guard";
 import {homeWebGuard} from "./guards/home-web/home-web.guard";
+import {profileGuard} from "./guards/profile/profile.guard";
+import {profileMobileGuard} from "./guards/profile-mobile/profile-mobile.guard";
 
 export const routes: Routes = [
   {
@@ -47,12 +49,18 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'profile-mobile',
+    redirectTo: 'profile-mobile/0',
+    pathMatch: 'full',
+  },
+  {
     path: 'profile/:user_id',
     loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage),
-
+    canActivate: [authGuard, profileGuard]
   },
   {
     path: 'profile-mobile/:user_id',
-    loadComponent: () => import('./pages/profile-mobile/profile-mobile.page').then( m => m.ProfileMobilePage)
+    loadComponent: () => import('./pages/profile-mobile/profile-mobile.page').then( m => m.ProfileMobilePage),
+    canActivate: [authGuard, profileMobileGuard]
   },
 ];

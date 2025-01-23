@@ -46,7 +46,6 @@ export class ProfileContentComponent implements OnInit {
 
   async ngOnInit() {
     this.user_id.subscribe(async (user_id) => { // Wait for the user_id to be available
-      console.log("Current User ID: ", user_id);
       if (user_id === 0) {
         return
       }
@@ -69,7 +68,6 @@ export class ProfileContentComponent implements OnInit {
               })
             )
             .subscribe(async (data: any) => {
-              console.log("Profile Fields: ", data)
               this.profile_fields.next(data as ProfileFieldInfo[])
             })
         })

@@ -29,6 +29,14 @@ export class ConfigService {
         this.authService.logout()
       }, 2000);
     }
+    else if(header === 'Profile Page Error') {
+      this.globalAlert(header, error?.error?.message || 'Unexpected URL Parameter. Navigating to home page.');
+      setTimeout(() => {
+        this.router.navigate(['/home']).then(() => {
+          window.location.reload();
+        })
+      }, 2000);
+    }
     else {
       this.globalAlert(header, error?.error?.message || 'Unknown Error. Please try again later.');
     }
