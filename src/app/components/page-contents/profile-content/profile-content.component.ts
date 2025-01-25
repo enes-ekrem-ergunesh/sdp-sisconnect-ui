@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProfileService} from "../../../services/profile/profile.service";
 import {ProfileInfo} from "../../../interfaces/profile-info";
 import {ProfileSegmentComponent} from "./profile-segment/profile-segment.component";
-import {BehaviorSubject, catchError, retry} from "rxjs";
+import {BehaviorSubject, catchError} from "rxjs";
 import {ConfigService} from "../../../services/config/config.service";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {ProfileFieldService} from "../../../services/profile-field/profile-field.service";

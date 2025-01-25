@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {addIcons} from "ionicons";
-import {home, chatbubbleEllipses, person, search} from "ionicons/icons";
+import {home, repeat, person, search} from "ionicons/icons";
 import {
   IonButton,
   IonButtons,
@@ -14,12 +14,12 @@ import {
   IonToolbar
 } from "@ionic/angular/standalone";
 import {HomeContentComponent} from "../page-contents/home-content/home-content.component";
-import {ChatContentComponent} from "../page-contents/chat-content/chat-content.component";
 import {ProfileContentComponent} from "../page-contents/profile-content/profile-content.component";
 import {UserService} from "../../services/user/user.service";
 import {BehaviorSubject, catchError} from "rxjs";
 import {ConfigService} from "../../services/config/config.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {ConnectionsContentComponent} from "../page-contents/connections-content/connections-content.component";
 
 @Component({
   selector: 'app-tabs',
@@ -36,13 +36,12 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
     IonTabButton,
     IonIcon,
     HomeContentComponent,
-    ChatContentComponent,
     ProfileContentComponent,
-    IonSearchbar,
     IonButtons,
     IonButton,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    ConnectionsContentComponent
   ],
   standalone: true
 })
@@ -54,7 +53,7 @@ export class TabsComponent implements OnInit{
     private configService: ConfigService,
     private userService: UserService,
   ) {
-    addIcons({home, chatbubbleEllipses, person, search})
+    addIcons({home, repeat, person, search})
   }
 
   async ngOnInit() {

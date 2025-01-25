@@ -14,6 +14,7 @@ import {
   IonHeader, IonToolbar
 } from "@ionic/angular/standalone";
 import {ActivatedRoute} from "@angular/router";
+import {User} from "../../interfaces/user";
 
 @Component({
   selector: 'app-profile',
@@ -59,7 +60,8 @@ export class ProfilePage implements OnInit {
         })
       )
       .subscribe(async (data: any) => {
-        this.current_user_id.next(data.id);
+        const user = data as User
+        this.current_user_id.next(user.id);
       })
   }
 

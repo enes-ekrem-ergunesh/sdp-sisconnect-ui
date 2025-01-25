@@ -16,7 +16,7 @@ export class ProfileService {
     private authService: AuthService
   ) { }
 
-  async getProfileInfo(user_id: number) {
+  async getProfileInfo(user_id: number|null) {
     const headers = await this.authService.getAuthorization()
     if (headers.Authorization === null) {
       return this.http.get(this.api_url + '/tokens/')

@@ -3,6 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button default-href="/tabs"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button id="connection-button" size="large" (click)="createRemoveConnection()">
+        <ion-icon name="person-add" *ngIf="!is_connected; else Connected"></ion-icon>
+        <ng-template #Connected>
+          <ion-icon name="person-remove"></ion-icon>
+        </ng-template>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

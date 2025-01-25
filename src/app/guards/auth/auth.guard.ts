@@ -26,7 +26,7 @@ export const authGuard: CanActivateFn = async () => {
       })
     )
     .subscribe( (response) => {
-        console.log(response)
+        // console.log(response)
       }
 
     )

@@ -12,11 +12,10 @@ export class ProfileFieldService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
     private authService: AuthService
   ) { }
 
-  async getAllProfileField(profile_id: number) {
+  async getAllProfileField(profile_id: number|null) {
     const headers = await this.authService.getAuthorization()
     if (headers.Authorization === null) {
       return this.http.get(this.api_url + '/tokens/')

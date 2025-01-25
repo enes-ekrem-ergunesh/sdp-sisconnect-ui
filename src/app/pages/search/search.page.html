@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
-    <ion-input (input)="searchUser()" placeholder="Search" [formControl]="searchQuery"></ion-input>
+    <ion-input #searchInput id="search-input" (input)="searchUser()" placeholder="Search" [formControl]="searchQuery"></ion-input>
   </ion-toolbar>
 </ion-header>
 
@@ -20,6 +20,7 @@
           <h1 class="ms-3">{{i.first_name}} {{i.last_name}}</h1>
           <p class="ms-3">{{i.email}}</p>
         </div>
+
       </ion-label>
     </ion-item>
   </ion-list>

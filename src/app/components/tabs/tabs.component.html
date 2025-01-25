@@ -20,8 +20,8 @@
       </ion-content>
     </div>
   </ion-tab>
-  <ion-tab tab="chat">
-    <div id="chat-page" class="h-100">
+  <ion-tab tab="connections">
+    <div id="connections-page" class="h-100">
       <ion-header>
         <ion-toolbar>
           <ion-title>{{ logo }}</ion-title>
@@ -29,7 +29,7 @@
       </ion-header>
       <ion-content>
         <div class="content-container">
-          <app-chat-content></app-chat-content>
+          <app-connections-content></app-connections-content>
         </div>
       </ion-content>
     </div>
@@ -54,9 +54,9 @@
       <ion-icon name="home"></ion-icon>
       Home
     </ion-tab-button>
-    <ion-tab-button tab="chat">
-      <ion-icon name="chatbubble-ellipses"></ion-icon>
-      Chat
+    <ion-tab-button tab="connections">
+      <ion-icon class="connections-icon" name="repeat"></ion-icon>
+      Connections
     </ion-tab-button>
     <ion-tab-button tab="profile">
       <ion-icon name="person"></ion-icon>
