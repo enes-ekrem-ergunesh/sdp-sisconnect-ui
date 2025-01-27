@@ -1,1 +1,13 @@
+<ion-list lines="full">
+  <ion-item *ngFor="let i of postsConnected.value">
+    <app-post-connected
+      [id]="i.id"
+      [user_id]="i.user_id"
+      [content]="i.content"
+      [created_at]="i.created_at"
+      class="w-100"
+    ></app-post-connected>
+  </ion-item>
+</ion-list>
 
+<div id="space" style="height: 140px"></div>

@@ -1,0 +1,17 @@
+<ion-textarea
+  [formControl]="postContent"
+
+  class="px-3 fs-4"
+  placeholder="How are you feeling today?"
+  [autoGrow]="true"
+  rows="6"
+  [counter]="true"
+  maxlength="1000"
+></ion-textarea>
+
+<ion-button
+  (click)="createPost()"
+
+  class="px-3"
+  expand="block"
+>Send Post</ion-button>

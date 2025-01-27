@@ -1,0 +1,9 @@
+<div class="pt-3 d-flex align-items-center">
+  <img ngSrc="assets/profile-image-placeholder.jpg" width="45" height="45" alt="Profile image" priority>
+  <ion-label class="ms-3 full-name">{{ userInfo.first_name }} {{userInfo.last_name}}</ion-label>
+</div>
+<p class="px-2 post-content">{{content}}</p>
+<div class="d-flex w-100">
+  <p class="ms-auto created-at">{{created_at_tz | amTimeAgo}}</p>
+
+</div>

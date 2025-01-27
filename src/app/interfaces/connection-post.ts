@@ -1,3 +1,3 @@
 export interface ConnectionPost {
-  'connected_user_id': number;
+  connected_user_id: number;
 }

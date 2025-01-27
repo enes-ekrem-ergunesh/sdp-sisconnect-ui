@@ -7,8 +7,12 @@ import {ConfigService} from "../../../services/config/config.service";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {ProfileFieldService} from "../../../services/profile-field/profile-field.service";
 import {ProfileFieldInfo} from "../../../interfaces/profile-field-info";
-import {IonButton} from "@ionic/angular/standalone";
+import {IonButton, IonFab, IonFabButton, IonFabList, IonIcon} from "@ionic/angular/standalone";
 import {PlatformService} from "../../../services/platform/platform.service";
+import {addIcons} from "ionicons";
+import {add} from "ionicons/icons";
+import {Router} from "@angular/router";
+import {CreatePostFabComponent} from "../../buttons/create-post-fab/create-post-fab.component";
 
 @Component({
   selector: 'app-profile-content',
@@ -18,7 +22,12 @@ import {PlatformService} from "../../../services/platform/platform.service";
     ProfileSegmentComponent,
     NgOptimizedImage,
     IonButton,
-    NgIf
+    NgIf,
+    IonFab,
+    IonFabButton,
+    IonIcon,
+    IonFabList,
+    CreatePostFabComponent
   ],
   standalone: true
 })
@@ -40,8 +49,10 @@ export class ProfileContentComponent implements OnInit {
     private configService: ConfigService,
     private profileService: ProfileService,
     private profileFieldService: ProfileFieldService,
-    private platformService: PlatformService
+    private platformService: PlatformService,
+    private router: Router
   ) {
+    addIcons({add})
   }
 
   async ngOnInit() {
@@ -78,6 +89,5 @@ export class ProfileContentComponent implements OnInit {
   isIonic() {
     return this.platformService.isMobile()
   }
-
 
 }

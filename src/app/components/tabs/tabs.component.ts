@@ -20,6 +20,7 @@ import {BehaviorSubject, catchError} from "rxjs";
 import {ConfigService} from "../../services/config/config.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {ConnectionsContentComponent} from "../page-contents/connections-content/connections-content.component";
+import {CreatePostFabComponent} from "../buttons/create-post-fab/create-post-fab.component";
 
 @Component({
   selector: 'app-tabs',
@@ -41,7 +42,8 @@ import {ConnectionsContentComponent} from "../page-contents/connections-content/
     IonButton,
     RouterLink,
     RouterLinkActive,
-    ConnectionsContentComponent
+    ConnectionsContentComponent,
+    CreatePostFabComponent
   ],
   standalone: true
 })

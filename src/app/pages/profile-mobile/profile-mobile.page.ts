@@ -18,13 +18,14 @@ import {personAdd, personRemove} from "ionicons/icons";
 import {addIcons} from "ionicons";
 import {ConnectionService} from "../../services/connection/connection.service";
 import {ConnectionInfo} from "../../interfaces/connection-info";
+import {CreatePostFabComponent} from "../../components/buttons/create-post-fab/create-post-fab.component";
 
 @Component({
   selector: 'app-profile-mobile',
   templateUrl: './profile-mobile.page.html',
   styleUrls: ['./profile-mobile.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonBackButton, IonButtons, ProfileContentComponent, IonButton, IonIcon]
+  imports: [IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonBackButton, IonButtons, ProfileContentComponent, IonButton, IonIcon, CreatePostFabComponent]
 })
 
 export class ProfileMobilePage implements OnInit {

@@ -63,4 +63,9 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/profile-mobile/profile-mobile.page').then( m => m.ProfileMobilePage),
     canActivate: [authGuard, profileMobileGuard]
   },
+  {
+    path: 'create-post-mobile',
+    loadComponent: () => import('./pages/create-post-mobile/create-post-mobile.page').then( m => m.CreatePostMobilePage),
+    canActivate: [authGuard]
+  },
 ];

@@ -23,4 +23,13 @@ export class ProfileService {
     }
     return this.http.get(this.api_url + '/profiles/' + user_id, {headers: headers});
   }
+
+  async getOwnProfileInfo() {
+    const headers = await this.authService.getAuthorization()
+    if (headers.Authorization === null) {
+      return this.http.get(this.api_url + '/tokens/')
+    }
+    return this.http.get(this.api_url + '/profiles/', {headers: headers});
+  }
+
 }
