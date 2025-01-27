@@ -26,11 +26,7 @@
   </div>
 </div>
 
-<div *ngIf="isIonic(); else desktop">
+<div>
   <app-profile-segment [profile_fields]="profile_fields"></app-profile-segment>
 </div>
-
-<ng-template #desktop>
-  <ion-button color="danger">Logout</ion-button>
-</ng-template>
 

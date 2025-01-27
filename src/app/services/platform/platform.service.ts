@@ -23,27 +23,31 @@ export class PlatformService {
   }
 
   isDesktop(): boolean {
-    return this.platform.is('desktop');
+    // return this.platform.is('desktop');
+    return false;
   }
 
   isElectron(): boolean {
-    return this.platform.is('electron');
+    // return this.platform.is('electron');
+    return false;
   }
 
   isWeb(): boolean {
-    return this.isDesktop() && !this.isElectron();
+    // return this.isDesktop() && !this.isElectron();
+    return false;
   }
 
   getPlatform(): string {
-    if (this.isMobile()) {
-      return 'mobile';
-    } else if (this.isElectron()) {
-      return 'electron';
-    } else if (this.isWeb()) {
-      return 'web';
-    } else {
-      return 'unknown';
-    }
+    return 'mobile';
+    // if (this.isMobile()) {
+    //   return 'mobile';
+    // } else if (this.isElectron()) {
+    //   return 'electron';
+    // } else if (this.isWeb()) {
+    //   return 'web';
+    // } else {
+    //   return 'unknown';
+    // }
   }
 
   getPlatformAdvanced(): string {

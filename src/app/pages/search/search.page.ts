@@ -18,6 +18,7 @@ import {SearchResult} from "../../interfaces/search-result";
 import {ConnectionInfo} from "../../interfaces/connection-info";
 import {addIcons} from "ionicons";
 import {closeCircle, closeCircleOutline} from "ionicons/icons";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -36,6 +37,7 @@ export class SearchPage implements OnInit {
     private userService: UserService,
     private configService: ConfigService,
     private connectionService: ConnectionService,
+    private router: Router
   ) {
     addIcons({closeCircleOutline, closeCircle})
   }
@@ -68,7 +70,8 @@ export class SearchPage implements OnInit {
   }
 
   goToProfile(user_id: number|null) {
-    window.location.href = '/profile/' + user_id
+    // window.location.href = '/profile/' + user_id
+    this.router.navigate(['/profile-mobile/' + user_id]).then()
   }
 
   getConnectionInfos() {

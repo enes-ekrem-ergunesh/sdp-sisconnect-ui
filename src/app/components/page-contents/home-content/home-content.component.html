@@ -1,3 +1,7 @@
+<ion-button fill="clear" expand="block" size="large" (click)="onRefresh()">
+  <ion-icon name="refresh"></ion-icon>
+</ion-button>
+
 <ion-list lines="full">
   <ion-item *ngFor="let i of postsConnected.value">
     <app-post-connected

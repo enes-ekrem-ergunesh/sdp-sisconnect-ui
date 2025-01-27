@@ -1,5 +1,5 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {IonButton, IonItem, IonList, IonRouterOutlet} from "@ionic/angular/standalone";
+import {IonButton, IonIcon, IonItem, IonList, IonRouterOutlet} from "@ionic/angular/standalone";
 import {Platform} from "@ionic/angular";
 import {App} from "@capacitor/app";
 import {PostService} from "../../../services/post/post.service";
@@ -8,6 +8,8 @@ import {PostInfo} from "../../../interfaces/post-info";
 import {ConfigService} from "../../../services/config/config.service";
 import {NgForOf} from "@angular/common";
 import {PostConnectedComponent} from "../../post/post-connected/post-connected.component";
+import {addIcons} from "ionicons";
+import {refresh} from "ionicons/icons";
 
 @Component({
   selector: 'app-home-content',
@@ -17,7 +19,9 @@ import {PostConnectedComponent} from "../../post/post-connected/post-connected.c
     IonList,
     IonItem,
     NgForOf,
-    PostConnectedComponent
+    PostConnectedComponent,
+    IonButton,
+    IonIcon
   ],
   standalone: true
 })
@@ -35,6 +39,7 @@ export class HomeContentComponent  implements OnInit {
         App.exitApp().then()
       }
     })
+    addIcons({refresh})
 
   }
 
@@ -63,4 +68,7 @@ export class HomeContentComponent  implements OnInit {
     })
   }
 
+  onRefresh(){
+    window.location.reload()
+  }
 }

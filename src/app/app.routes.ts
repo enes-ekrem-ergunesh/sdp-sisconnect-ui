@@ -17,22 +17,21 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
-    canActivate: [authGuard, homeWebGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'tabs',
     component: TabsComponent,
-    canActivate: [authGuard, tabsMobileGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'login',
-    redirectTo: 'login-web',
+    redirectTo: 'login-mobile',
     pathMatch: 'full',
   },
   {
     path: 'login-mobile',
-    loadComponent: () => import('./pages/login-mobile/login-mobile.page').then( m => m.LoginMobilePage),
-    canActivate: [loginMobileGuard]
+    loadComponent: () => import('./pages/login-mobile/login-mobile.page').then( m => m.LoginMobilePage)
   },
   {
     path: 'login-web',
@@ -44,11 +43,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/search/search.page').then( m => m.SearchPage)
   },
   {
-    path: 'profile',
-    redirectTo: 'profile/0',
-    pathMatch: 'full',
-  },
-  {
     path: 'profile-mobile',
     redirectTo: 'profile-mobile/0',
     pathMatch: 'full',
@@ -56,12 +50,12 @@ export const routes: Routes = [
   {
     path: 'profile/:user_id',
     loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage),
-    canActivate: [authGuard, profileGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'profile-mobile/:user_id',
     loadComponent: () => import('./pages/profile-mobile/profile-mobile.page').then( m => m.ProfileMobilePage),
-    canActivate: [authGuard, profileMobileGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'create-post-mobile',
