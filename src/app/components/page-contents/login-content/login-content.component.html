@@ -6,9 +6,8 @@
 
 <ng-template #desktop>
   <div class="mt-2 d-flex">
-    <div *ngIf="false" id="bs-mask" class="iframe-mask-bs"></div>
-    <div *ngIf="isMobileWeb()" id="ion-mask" class="iframe-mask-ion"></div>
-    <div id="google-button" class="mx-auto">
+    <div id="ion-mask" [class]="'iframe-mask-ion ' + googleButtonClass + ' ' + maskClass"></div>
+    <div id="google-button" [class]="'mx-auto ' + googleButtonClass" [style.visibility]="googleButtonVisibility">
     </div>
   </div>
 </ng-template>

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {LoginFormComponent} from "../../forms/login-form/login-form.component";
 import {LoginForm} from "../../../interfaces/login-form";
 import {FormGroup} from "@angular/forms";
@@ -24,6 +24,9 @@ import {NgIf} from "@angular/common";
   standalone: true
 })
 export class LoginContentComponent implements AfterViewInit {
+  googleButtonVisibility = 'hidden'
+  googleButtonClass = ''
+  maskClass = 'invisible'
 
   constructor(
     private authService: AuthService,
@@ -35,6 +38,7 @@ export class LoginContentComponent implements AfterViewInit {
   }
 
   async ngAfterViewInit() {
+    console.log("Platform:", this.isIonic() && !this.isMobileWeb())
     if (this.isIonic() && !this.isMobileWeb()) {
       return
     }
@@ -58,15 +62,18 @@ export class LoginContentComponent implements AfterViewInit {
       }
     );
     // @ts-ignore
-    google.accounts.id.prompt((notification: PromptMomentNotification) => {
+    google.accounts.id.prompt(() => {
     });
 
+    this.centerMask()
     setTimeout(() => {
       this.centerMask()
-    }, 10)
+      this.googleButtonVisibility = 'visible'
+      this.googleButtonClass = 'pulse'
+    }, 1000)
     setTimeout(() => {
-      this.centerMask()
-    }, 500)
+      this.maskClass = 'visible'
+    }, 1010)
     addEventListener("orientationchange", () => {
       setTimeout(() => {
         this.centerMask()

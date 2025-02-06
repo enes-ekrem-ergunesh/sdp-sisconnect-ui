@@ -16,8 +16,8 @@
   position: absolute;
   z-index: 100;
   top: 1000px;
-  width: 68px;
-  height: 50px;
+  width: 74px;
+  height: 55px;
   background-color: rgb(18, 18, 18);
   /* -webkit-mask: radial-gradient(circle, transparent 50px, black 51px); */
   mask: radial-gradient(circle, transparent 17px, black 20px); /* Create a hole */
@@ -36,4 +36,23 @@
   .iframe-mask-ion {
     visibility: visible;
   }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.pulse {
+  animation: pulse 0.5s ease-out;
 }

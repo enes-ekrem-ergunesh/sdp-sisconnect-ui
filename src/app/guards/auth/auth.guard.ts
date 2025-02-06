@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = async () => {
   await storageService.init();
 
   if (!await storageService.get('token')) {
-    router.navigate(['/login']).then()
+    router.navigate(['/login-mobile']).then()
     return false
   }
 
@@ -28,7 +28,6 @@ export const authGuard: CanActivateFn = async () => {
     .subscribe( (response) => {
         // console.log(response)
       }
-
     )
 
 

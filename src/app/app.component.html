@@ -1,10 +1,4 @@
-<ion-app *ngIf="isMobile(); else elseBlock">
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
-
-<ng-template #elseBlock>
-  <router-outlet></router-outlet>
-</ng-template>
+<ion-router-outlet></ion-router-outlet>
 
 <app-alert
   [isAlertOpen]="isAlertOpen.value"

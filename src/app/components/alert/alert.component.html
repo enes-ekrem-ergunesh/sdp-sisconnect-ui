@@ -1,29 +1,8 @@
-<div *ngIf="isIonic(); else desktopForm">
-  <ion-alert
-    [isOpen]="isAlertOpen"
-    [header]="alertHeader"
-    [subHeader]="alertSubHeader"
-    [message]="alertMessage"
-    [buttons]="alertButtons"
-    (didDismiss)="setOpen(false)"
-  ></ion-alert>
-</div>
-
-<ng-template #desktopForm>
-  <div class="modal fade" id="bsAlert" tabindex="-1" aria-labelledby="bsAlertLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="bsAlertLabel">{{alertHeader}}</h1>
-          <button type="button" class="btn-close" (click)="setOpen(false)" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>{{alertMessage}}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="setOpen(false)" data-bs-dismiss="modal">Ok</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
+<ion-alert
+  [isOpen]="isAlertOpen"
+  [header]="alertHeader"
+  [subHeader]="alertSubHeader"
+  [message]="alertMessage"
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false)"
+></ion-alert>
