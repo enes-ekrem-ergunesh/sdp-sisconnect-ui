@@ -74,11 +74,6 @@ export class LoginContentComponent implements AfterViewInit {
     setTimeout(() => {
       this.maskClass = 'visible'
     }, 1010)
-    addEventListener("orientationchange", () => {
-      setTimeout(() => {
-        this.centerMask()
-      }, 10)
-    })
   }
 
   emailPasswordLogin(loginForm: FormGroup<LoginForm>) {
@@ -102,7 +97,6 @@ export class LoginContentComponent implements AfterViewInit {
         this.storageService.set('token', res.token)
         this.router.navigate(['/'], {replaceUrl: true}).then()
       })
-
   }
 
   googleWebLogin(response: any) {
@@ -141,10 +135,10 @@ export class LoginContentComponent implements AfterViewInit {
   centerMask() {
     const googleButton = document.getElementById("google-button")
     const ionMask = document.getElementById("ion-mask")
-    const toolbarHeight = this.platformService.isIos() ? 44 : 56
+    const toolbarHeight = 0
     if (googleButton == null || ionMask == null) return
     ionMask.style.left = (googleButton.offsetLeft + googleButton.offsetWidth / 2)
-      - (ionMask.offsetWidth / 2) + "px"
+      - (ionMask.offsetWidth / 2) - 1 + "px"
     ionMask.style.top = (toolbarHeight + googleButton.offsetTop + googleButton.offsetHeight / 2)
       - (ionMask.offsetHeight / 2) + "px"
   }
