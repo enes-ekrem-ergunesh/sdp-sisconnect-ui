@@ -1,4 +1,4 @@
-import {Component, Renderer2} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {IonApp, IonRouterOutlet} from '@ionic/angular/standalone';
 import {ColorModeService} from "./services/color-mode/color-mode.service";
 import {RouterOutlet} from "@angular/router";
@@ -8,6 +8,7 @@ import {AlertComponent} from "./components/alert/alert.component";
 import {ConfigService} from "./services/config/config.service";
 import {BehaviorSubject} from "rxjs";
 import {Modal} from "bootstrap";
+import {UserService} from "./services/user/user.service";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ import {Modal} from "bootstrap";
   standalone: true,
   imports: [IonApp, IonRouterOutlet, RouterOutlet, NgIf, AlertComponent],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   platform!: string
 
   isAlertOpen!: BehaviorSubject<boolean>;
@@ -28,7 +29,8 @@ export class AppComponent {
     private colorModeService: ColorModeService,
     private renderer: Renderer2,
     private platformService: PlatformService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private userService: UserService
   ) {
     this.colorModeService.theme$.subscribe(theme => {
       // Update the `data-bs-theme` attribute on the HTML element
@@ -54,6 +56,11 @@ export class AppComponent {
         this.bootstrapAlertHide(bsAlert);
       }
     })
+  }
+
+  ngOnInit() {
+    console.log('AppComponent initialized')
+    this.userService.init().then();
   }
 
   isMobile(): boolean {

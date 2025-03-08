@@ -19,6 +19,7 @@ import {addIcons} from "ionicons";
 import {ConnectionService} from "../../services/connection/connection.service";
 import {ConnectionInfo} from "../../interfaces/connection-info";
 import {CreatePostFabComponent} from "../../components/buttons/create-post-fab/create-post-fab.component";
+import {User} from "../../interfaces/user";
 
 @Component({
   selector: 'app-profile-mobile',
@@ -29,15 +30,15 @@ import {CreatePostFabComponent} from "../../components/buttons/create-post-fab/c
 })
 
 export class ProfileMobilePage implements OnInit {
-  current_user_id = new BehaviorSubject<number>(0)
-  current_connection_info = new BehaviorSubject<ConnectionInfo>({
+  currentUser = new BehaviorSubject<User>({} as User)
+  currentConnectionInfo = new BehaviorSubject<ConnectionInfo>({
     id: null,
     user_id: null,
     connected_user_id: null,
     accepted_at: null,
     is_blocked: null,
   })
-  is_connected = false
+  isConnected = false
 
   constructor(
     private configService: ConfigService,
@@ -54,20 +55,30 @@ export class ProfileMobilePage implements OnInit {
 
     if (user_id) {
       if (user_id !== "0") {
-        try {
-          this.current_user_id.next(Number(user_id))
-        } catch (error) {
-          this.configService.handleError(error, "Profile ID Error")
-        }
+        await this.getCurrentUser(user_id)
       } else {
-        await this.getCurrentProfileId()
+        await this.getSelfUser()
       }
     }
     this.getConnectionInfo()
     this.onConnectionUpdate()
   }
 
-  async getCurrentProfileId() {
+  async getCurrentUser(user_id: any) {
+    // Get the current user id
+    (await this.userService.getUserById(user_id))
+      .pipe(
+        catchError(async (error) => {
+          this.configService.handleError(error, "User Info Access Error")
+          throw error
+        })
+      )
+      .subscribe(async (data: any) => {
+        this.currentUser.next(data as User);
+      })
+  }
+
+  async getSelfUser() {
     // Get the current user id
     (await this.userService.getCurrentUser())
       .pipe(
@@ -77,15 +88,18 @@ export class ProfileMobilePage implements OnInit {
         })
       )
       .subscribe(async (data: any) => {
-        this.current_user_id.next(data.id);
+        this.currentUser.next(data as User);
       })
   }
 
   getConnectionInfo() {
-    this.current_user_id.subscribe(async (user_id) => {
-      if (user_id !== 0) {
+    this.currentUser.subscribe(async (user) => {
+      if (!user.id) {
+        return
+      }
+      if (user.id !== 0) {
         // Get the connection info
-        (await this.connectionService.getConnectionById(user_id))
+        (await this.connectionService.getConnectionById(user.id))
           .pipe(
             catchError(async (error) => {
               this.configService.handleError(error, "Connection Info Access Error")
@@ -94,27 +108,26 @@ export class ProfileMobilePage implements OnInit {
           )
           .subscribe(async (data: any) => {
             const connection_info = data as ConnectionInfo
-            console.warn(connection_info)
-            this.current_connection_info.next(connection_info);
+            this.currentConnectionInfo.next(connection_info);
           })
       }
     });
   }
 
   onConnectionUpdate() {
-    this.current_connection_info.subscribe(async (connection_info) => {
+    this.currentConnectionInfo.subscribe(async (connection_info) => {
       if (connection_info.is_blocked) {
         this.router.navigate(['/']).then(() => {
           window.location.reload()
         })
       }
-      this.is_connected = connection_info.id !== null;
+      this.isConnected = connection_info.id !== null;
     })
   }
 
   async createRemoveConnection() {
-    if (this.current_connection_info.value.id === null) {
-      (await this.connectionService.createConnection(this.current_user_id.value))
+    if (this.currentConnectionInfo.value.id === null) {
+      (await this.connectionService.createConnection(this.currentUser.value.id))
         .pipe(
           catchError(async (error) => {
             this.configService.handleError(error, "Connection Access Error")
@@ -122,11 +135,11 @@ export class ProfileMobilePage implements OnInit {
           })
         )
         .subscribe(async () => {
-          this.current_user_id.next(this.current_user_id.value)
+          this.currentUser.next(this.currentUser.value)
         })
     }
     else {
-      (await this.connectionService.removeConnection(this.current_user_id.value))
+      (await this.connectionService.removeConnection(this.currentUser.value.id))
         .pipe(
           catchError(async (error) => {
             this.configService.handleError(error, "Connection Access Error")
@@ -134,7 +147,7 @@ export class ProfileMobilePage implements OnInit {
           })
         )
         .subscribe(async () => {
-          this.current_user_id.next(this.current_user_id.value)
+          this.currentUser.next(this.currentUser.value)
         })
     }
   }

@@ -2,24 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {addIcons} from "ionicons";
 import {home, repeat, person, search} from "ionicons/icons";
 import {
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon, IonSearchbar, IonTab,
+  IonIcon,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonTitle,
-  IonToolbar
 } from "@ionic/angular/standalone";
-import {HomeContentComponent} from "../page-contents/home-content/home-content.component";
-import {ProfileContentComponent} from "../page-contents/profile-content/profile-content.component";
 import {UserService} from "../../services/user/user.service";
 import {BehaviorSubject, catchError} from "rxjs";
 import {ConfigService} from "../../services/config/config.service";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {ConnectionsContentComponent} from "../page-contents/connections-content/connections-content.component";
 import {CreatePostFabComponent} from "../buttons/create-post-fab/create-post-fab.component";
 
 @Component({
@@ -27,22 +17,10 @@ import {CreatePostFabComponent} from "../buttons/create-post-fab/create-post-fab
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
   imports: [
-    IonTab,
     IonTabs,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
     IonTabBar,
     IonTabButton,
     IonIcon,
-    HomeContentComponent,
-    ProfileContentComponent,
-    IonButtons,
-    IonButton,
-    RouterLink,
-    RouterLinkActive,
-    ConnectionsContentComponent,
     CreatePostFabComponent
   ],
   standalone: true
@@ -63,7 +41,6 @@ export class TabsComponent implements OnInit{
   }
 
   async getCurrentProfileId() {
-    // Get the current user id
     (await this.userService.getCurrentUser())
       .pipe(
         catchError(async (error) => {

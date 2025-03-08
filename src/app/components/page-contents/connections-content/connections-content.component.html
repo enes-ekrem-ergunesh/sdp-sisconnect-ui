@@ -1,22 +1,38 @@
-<ion-button (click)="onClickShowBlocked()" size="block" color="danger" [fill]="showBlocked? 'solid': 'outline'">Show Blocked</ion-button>
-<div *ngIf="isEmpty" class="mt-3 w-100 text-center">
-  <h4>No connections found</h4>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <app-logo></app-logo>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="content-container">
+    <app-refresher></app-refresher>
 
-<ion-list *ngIf="!isEmpty">
-  <ion-item *ngFor="let i of connectionItems.value">
-    <ion-label (click)="goToProfile(i.user_id, i.is_blocked)" class="d-flex align-items-center">
-      <img src="assets/profile-image-placeholder.jpg" width="40" height="40">
-      <div>
-        <h1 class="ms-3">{{i.first_name}} {{i.last_name}}</h1>
-        <p class="ms-3">{{i.email}}</p>
-      </div>
-    </ion-label>
-    <ion-button (click)="blockUnblockConnection(i.user_id, i.is_blocked)" id="block-button" size="large" fill="clear" color="danger" class="ms-auto">
-      <ion-icon size="large" name="close-circle-outline" *ngIf="false; else Blocked"></ion-icon>
-      <ng-template #Blocked>
-        <ion-icon size="large" name="close-circle"></ion-icon>
-      </ng-template>
+    <ion-button (click)="onClickShowBlocked()" size="block" color="danger" [fill]="showBlocked? 'solid': 'outline'">Show
+      Blocked
     </ion-button>
-  </ion-item>
-</ion-list>
+    <div *ngIf="isEmpty" class="mt-3 w-100 text-center">
+      <h4>No connections found</h4>
+    </div>
+
+    <ion-list *ngIf="!isEmpty">
+      <ion-item *ngFor="let i of connectionItems.value">
+        <ion-label (click)="goToProfile(i.user_id, i.is_blocked)" class="d-flex align-items-center">
+          <img src="assets/profile-image-placeholder.jpg" width="40" height="40">
+          <div>
+            <h1 class="ms-3">{{ i.first_name }} {{ i.last_name }}</h1>
+            <p class="ms-3">{{ i.email }}</p>
+          </div>
+        </ion-label>
+        <ion-button (click)="blockUnblockConnection(i.user_id, i.is_blocked)" id="block-button" size="large"
+                    fill="clear" color="danger" class="ms-auto">
+          <ion-icon size="large" name="close-circle-outline" *ngIf="false; else Blocked"></ion-icon>
+          <ng-template #Blocked>
+            <ion-icon size="large" name="close-circle"></ion-icon>
+          </ng-template>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>
+

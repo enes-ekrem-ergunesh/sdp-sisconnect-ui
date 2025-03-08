@@ -70,7 +70,6 @@ export class SearchPage implements OnInit {
   }
 
   goToProfile(user_id: number|null) {
-    // window.location.href = '/profile/' + user_id
     this.router.navigate(['/profile-mobile/' + user_id]).then()
   }
 

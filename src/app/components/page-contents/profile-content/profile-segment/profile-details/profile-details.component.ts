@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {IonButton, IonItem, IonLabel, IonList} from "@ionic/angular/standalone";
 import {DatePipe, NgForOf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {BehaviorSubject} from "rxjs";
@@ -23,13 +23,18 @@ import {AuthService} from "../../../../../services/auth/auth.service";
   standalone: true
 })
 export class ProfileDetailsComponent  implements OnInit {
-  @Input() profile_fields!: BehaviorSubject<ProfileFieldInfo[]>
+  @Input() profileFields!: BehaviorSubject<ProfileFieldInfo[]>
+
+  isOwner = false
 
   constructor(
     private authService: AuthService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
+    this.isOwner = window.location.href.includes('tabs')
+    this.cdr.detectChanges()
     return
   }
   logout(){

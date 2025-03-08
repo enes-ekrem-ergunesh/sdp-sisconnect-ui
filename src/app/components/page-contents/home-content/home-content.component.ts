@@ -1,5 +1,12 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {IonButton, IonIcon, IonItem, IonList, IonRouterOutlet} from "@ionic/angular/standalone";
+import {
+  IonButton,
+  IonButtons, IonContent,
+  IonHeader, IonIcon,
+  IonItem,
+  IonList,
+  IonRouterOutlet, IonTitle, IonToolbar
+} from "@ionic/angular/standalone";
 import {Platform} from "@ionic/angular";
 import {App} from "@capacitor/app";
 import {PostService} from "../../../services/post/post.service";
@@ -7,9 +14,13 @@ import {BehaviorSubject, catchError} from "rxjs";
 import {PostInfo} from "../../../interfaces/post-info";
 import {ConfigService} from "../../../services/config/config.service";
 import {NgForOf} from "@angular/common";
-import {PostConnectedComponent} from "../../post/post-connected/post-connected.component";
 import {addIcons} from "ionicons";
 import {refresh} from "ionicons/icons";
+import {RefresherComponent} from "../../refresher/refresher.component";
+import {PostComponent} from "../../post/post.component";
+import {RouterLink, RouterLinkActive} from "@angular/router";
+import {CreatePostFabComponent} from "../../buttons/create-post-fab/create-post-fab.component";
+import {LogoComponent} from "../../logo/logo.component";
 
 @Component({
   selector: 'app-home-content',
@@ -19,9 +30,19 @@ import {refresh} from "ionicons/icons";
     IonList,
     IonItem,
     NgForOf,
-    PostConnectedComponent,
+    RefresherComponent,
+    PostComponent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonTitle,
     IonButton,
-    IonIcon
+    IonIcon,
+    IonContent,
+    RouterLink,
+    RouterLinkActive,
+    CreatePostFabComponent,
+    LogoComponent
   ],
   standalone: true
 })
@@ -45,7 +66,6 @@ export class HomeContentComponent  implements OnInit {
 
   async ngOnInit() {
     await this.getAllPostsConnected()
-    // this.onPostsOfConnectedUpdate()
   }
 
   async getAllPostsConnected(){
@@ -60,15 +80,5 @@ export class HomeContentComponent  implements OnInit {
         const _posts = posts as PostInfo[]
         this.postsConnected.next(_posts)
       })
-  }
-
-  onPostsOfConnectedUpdate() {
-    this.postsConnected.subscribe((posts) => {
-      console.log(posts)
-    })
-  }
-
-  onRefresh(){
-    window.location.reload()
   }
 }

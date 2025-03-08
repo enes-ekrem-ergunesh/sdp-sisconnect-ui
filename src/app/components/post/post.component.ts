@@ -1,34 +1,36 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ProfileInfo} from "../../../interfaces/profile-info";
-import {ProfileService} from "../../../services/profile/profile.service";
-import {ConfigService} from "../../../services/config/config.service";
-import {catchError} from "rxjs";
-import {NgOptimizedImage} from "@angular/common";
-import {IonButton, IonIcon, IonLabel} from "@ionic/angular/standalone";
-import {MomentModule} from "ngx-moment";
+import {ProfileInfo} from "../../interfaces/profile-info";
+import {ProfileService} from "../../services/profile/profile.service";
+import {ConfigService} from "../../services/config/config.service";
+import {PostService} from "../../services/post/post.service";
+import {StorageService} from "../../services/storage/storage.service";
 import {addIcons} from "ionicons";
 import {trash} from "ionicons/icons";
-import {PostService} from "../../../services/post/post.service";
+import {catchError} from "rxjs";
+import {IonButton, IonIcon, IonLabel} from "@ionic/angular/standalone";
+import {MomentModule} from "ngx-moment";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
-  selector: 'app-post-owned',
-  templateUrl: './post-owned.component.html',
-  styleUrls: ['./post-owned.component.scss'],
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.scss'],
   imports: [
-    NgOptimizedImage,
     IonLabel,
-    MomentModule,
     IonButton,
-    IonIcon
+    IonIcon,
+    MomentModule,
+    NgOptimizedImage
   ],
   standalone: true
 })
-export class PostOwnedComponent  implements OnInit {
+export class PostComponent  implements OnInit {
   @Input() user_id!: number;
   @Input() id!: number;
   @Input() content!: string;
   @Input() created_at!: string;
   @Output() postDeleted = new EventEmitter<void>();
+  current_user_id!: number;
   created_at_tz!: Date
   current_tz = 1
   userInfo: ProfileInfo = {
@@ -43,7 +45,8 @@ export class PostOwnedComponent  implements OnInit {
   constructor(
     private profileService: ProfileService,
     private configService: ConfigService,
-    private postService: PostService
+    private postService: PostService,
+    private storageService: StorageService
   ) {
     addIcons({trash})
   }
@@ -51,6 +54,11 @@ export class PostOwnedComponent  implements OnInit {
   async ngOnInit() {
     await this.getUserInfo()
     this.created_at_tz = new Date(new Date(this.created_at).getTime() + this.current_tz * 60 * 60 * 1000); // adjust tz
+
+    this.storageService.get('user').then((user) => {
+      this.current_user_id = user.id
+      // console.log(this.current_user_id == this.user_id)
+    })
     return
   }
 

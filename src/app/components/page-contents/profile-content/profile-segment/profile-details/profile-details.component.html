@@ -1,5 +1,5 @@
 <ion-list>
-  <ion-item *ngFor="let i of profile_fields.value;">
+  <ion-item *ngFor="let i of profileFields.value;">
     <ion-label>
       <h2>{{ i.profile_field_type }}</h2>
       <ng-container [ngSwitch]="i.profile_field_data_type">
@@ -10,4 +10,4 @@
   </ion-item>
 </ion-list>
 
-<ion-button (click)="logout()" color="danger" size="block">Logout</ion-button>
+<ion-button (click)="logout()" color="danger" size="block" [style.display]="isOwner? 'block': 'none'">Logout</ion-button>

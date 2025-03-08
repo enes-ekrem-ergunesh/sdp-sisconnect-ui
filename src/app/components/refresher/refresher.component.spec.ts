@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PostConnectedComponent } from './post-connected.component';
+import { RefresherComponent } from './refresher.component';
 
-describe('PostConnectedComponent', () => {
-  let component: PostConnectedComponent;
-  let fixture: ComponentFixture<PostConnectedComponent>;
+describe('RefresherComponent', () => {
+  let component: RefresherComponent;
+  let fixture: ComponentFixture<RefresherComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostConnectedComponent ],
+      declarations: [ RefresherComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PostConnectedComponent);
+    fixture = TestBed.createComponent(RefresherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

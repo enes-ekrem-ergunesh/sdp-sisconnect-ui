@@ -1,17 +1,32 @@
-<ion-button fill="clear" expand="block" size="large" (click)="onRefresh()">
-  <ion-icon name="refresh"></ion-icon>
-</ion-button>
+<ion-header>
+  <ion-toolbar>
+    <app-logo></app-logo>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page" style="color: white">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+        </a>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="content-container">
+    <app-refresher></app-refresher>
 
-<ion-list lines="full">
-  <ion-item *ngFor="let i of postsConnected.value">
-    <app-post-connected
-      [id]="i.id"
-      [user_id]="i.user_id"
-      [content]="i.content"
-      [created_at]="i.created_at"
-      class="w-100"
-    ></app-post-connected>
-  </ion-item>
-</ion-list>
+    <ion-list lines="full">
+      <ion-item *ngFor="let i of postsConnected.value">
+        <app-post
+          [id]="i.id"
+          [user_id]="i.user_id"
+          [content]="i.content"
+          [created_at]="i.created_at"
+          class="w-100"
+        ></app-post>
+      </ion-item>
+    </ion-list>
 
-<div id="space" style="height: 140px"></div>
+    <div id="space" style="height: 140px"></div>
+  </div>
+</ion-content>
+

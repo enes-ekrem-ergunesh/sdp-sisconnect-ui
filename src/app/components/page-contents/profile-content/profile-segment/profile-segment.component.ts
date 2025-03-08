@@ -4,6 +4,8 @@ import {ProfileDetailsComponent} from "./profile-details/profile-details.compone
 import {ProfilePostsComponent} from "./profile-posts/profile-posts.component";
 import {BehaviorSubject} from "rxjs";
 import {ProfileFieldInfo} from "../../../../interfaces/profile-field-info";
+import {PostInfo} from "../../../../interfaces/post-info";
+import {ProfileInfo} from "../../../../interfaces/profile-info";
 
 @Component({
   selector: 'app-profile-segment',
@@ -21,7 +23,8 @@ import {ProfileFieldInfo} from "../../../../interfaces/profile-field-info";
   standalone: true
 })
 export class ProfileSegmentComponent  implements OnInit {
-  @Input() profile_fields!: BehaviorSubject<ProfileFieldInfo[]>
+  @Input() profileFields!: BehaviorSubject<ProfileFieldInfo[]>
+  @Input() profilePosts!: BehaviorSubject<PostInfo[]>
 
   constructor() { }
 

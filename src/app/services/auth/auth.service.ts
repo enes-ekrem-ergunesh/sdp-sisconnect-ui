@@ -41,12 +41,10 @@ export class AuthService {
 
   async getAuthorization() {
     if (!this.storageService.isReady()) {
-      console.warn('storage is not ready')
       await this.storageService.init()
     }
     let token = await this.storageService.get('token')
     if (!token) {
-      console.warn('getAuthorization: token is not found')
       this.router.navigate(['/login']).then()
       throw new Error('token is not found')
     }
@@ -59,10 +57,8 @@ export class AuthService {
     this.getAuthorization()
       .then((headers) => {
         if (headers.Authorization === null) {
-          console.warn('headers.Authorization is null')
           return
         }
-        // console.warn('revoke token:', headers)
         this.http.put(this.api_url + '/tokens/', {}, {headers: (headers)})
           .pipe(
             catchError(error => {

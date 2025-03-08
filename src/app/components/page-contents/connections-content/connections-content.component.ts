@@ -2,15 +2,25 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject, catchError} from "rxjs";
 import {ConnectionInfo} from "../../../interfaces/connection-info";
 import {ConnectionService} from "../../../services/connection/connection.service";
-import {IonButton, IonIcon, IonItem, IonLabel, IonList} from "@ionic/angular/standalone";
+import {
+  IonButton, IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonToolbar
+} from "@ionic/angular/standalone";
 import {NgForOf, NgIf} from "@angular/common";
-import {UserService} from "../../../services/user/user.service";
 import {ConfigService} from "../../../services/config/config.service";
 import {ProfileService} from "../../../services/profile/profile.service";
 import {ProfileInfo} from "../../../interfaces/profile-info";
 import {addIcons} from "ionicons";
 import {closeCircle, closeCircleOutline} from "ionicons/icons";
 import {ConnectionPageItem} from "../../../interfaces/connection-page-item";
+import {Router} from "@angular/router";
+import {RefresherComponent} from "../../refresher/refresher.component";
+import {LogoComponent} from "../../logo/logo.component";
 
 @Component({
   selector: 'app-connections-content',
@@ -23,7 +33,12 @@ import {ConnectionPageItem} from "../../../interfaces/connection-page-item";
     NgForOf,
     NgIf,
     IonButton,
-    IonIcon
+    IonIcon,
+    RefresherComponent,
+    IonHeader,
+    IonToolbar,
+    IonContent,
+    LogoComponent
   ],
   standalone: true
 })
@@ -36,9 +51,9 @@ export class ConnectionsContentComponent implements OnInit {
 
   constructor(
     private connectionService: ConnectionService,
-    private usersService: UserService,
     private configService: ConfigService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {
     addIcons({closeCircleOutline, closeCircle})
   }
@@ -49,7 +64,7 @@ export class ConnectionsContentComponent implements OnInit {
   }
 
   goToProfile(user_id: number|null, is_blocked: boolean|null) {
-    if (!is_blocked) window.location.href = '/profile/' + user_id
+    if (!is_blocked) this.router.navigate(['/profile-mobile/' + user_id]).then()
   }
 
   async getConnections() {

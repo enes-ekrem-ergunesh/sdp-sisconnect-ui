@@ -1,64 +1,81 @@
-<ion-tabs>
-  <ion-tab tab="home">
-    <div id="home-page" class="h-100">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>{{ logo }}</ion-title>
-          <ion-buttons slot="secondary">
-            <ion-button>
-              <a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page" style="color: white">
-                <ion-icon slot="icon-only" name="search"></ion-icon>
-              </a>
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <div class="content-container">
-          <app-home-content></app-home-content>
-        </div>
-      </ion-content>
-    </div>
-  </ion-tab>
-  <ion-tab tab="connections">
-    <div id="connections-page" class="h-100">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>{{ logo }}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <div class="content-container">
-          <app-connections-content></app-connections-content>
-        </div>
-      </ion-content>
-    </div>
-  </ion-tab>
-  <ion-tab tab="profile">
-    <div id="profile-page" class="h-100">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>{{ logo }}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <div class="content-container">
-          <app-profile-content [user_id]="current_user_id"></app-profile-content>
-        </div>
-      </ion-content>
-    </div>
-  </ion-tab>
+<!--<ion-tabs>-->
+<!--  <ion-tab tab="home">-->
+<!--    <div id="home-page" class="h-100">-->
+<!--      <ion-header>-->
+<!--        <ion-toolbar>-->
+<!--          <ion-title>{{ logo }}</ion-title>-->
+<!--          <ion-buttons slot="secondary">-->
+<!--            <ion-button>-->
+<!--              <a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page" style="color: white">-->
+<!--                <ion-icon slot="icon-only" name="search"></ion-icon>-->
+<!--              </a>-->
+<!--            </ion-button>-->
+<!--          </ion-buttons>-->
+<!--        </ion-toolbar>-->
+<!--      </ion-header>-->
+<!--      <ion-content>-->
+<!--        <div class="content-container">-->
+<!--          <app-home-content></app-home-content>-->
+<!--        </div>-->
+<!--      </ion-content>-->
+<!--    </div>-->
+<!--  </ion-tab>-->
+<!--  <ion-tab tab="connections">-->
+<!--    <div id="connections-page" class="h-100">-->
+<!--      <ion-header>-->
+<!--        <ion-toolbar>-->
+<!--          <ion-title>{{ logo }}</ion-title>-->
+<!--        </ion-toolbar>-->
+<!--      </ion-header>-->
+<!--      <ion-content>-->
+<!--        <div class="content-container">-->
+<!--          <app-connections-content></app-connections-content>-->
+<!--        </div>-->
+<!--      </ion-content>-->
+<!--    </div>-->
+<!--  </ion-tab>-->
+<!--  <ion-tab tab="profile">-->
+<!--    <div id="profile-page" class="h-100">-->
+<!--      <ion-header>-->
+<!--        <ion-toolbar>-->
+<!--          <ion-title>{{ logo }}</ion-title>-->
+<!--        </ion-toolbar>-->
+<!--      </ion-header>-->
+<!--      <ion-content>-->
+<!--        <div class="content-container">-->
+<!--          <app-profile-content [user_id]="current_user_id"></app-profile-content>-->
+<!--        </div>-->
+<!--      </ion-content>-->
+<!--    </div>-->
+<!--  </ion-tab>-->
 
+<!--  <ion-tab-bar slot="bottom">-->
+<!--    <ion-tab-button tab="home">-->
+<!--      <ion-icon name="home"></ion-icon>-->
+<!--      Home-->
+<!--    </ion-tab-button>-->
+<!--    <ion-tab-button tab="connections">-->
+<!--      <ion-icon class="connections-icon" name="repeat"></ion-icon>-->
+<!--      Connections-->
+<!--    </ion-tab-button>-->
+<!--    <ion-tab-button tab="profile">-->
+<!--      <ion-icon name="person"></ion-icon>-->
+<!--      Profile-->
+<!--    </ion-tab-button>-->
+<!--  </ion-tab-bar>-->
+<!--</ion-tabs>-->
+
+<ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
       <ion-icon name="home"></ion-icon>
       Home
     </ion-tab-button>
     <ion-tab-button tab="connections">
-      <ion-icon class="connections-icon" name="repeat"></ion-icon>
+      <ion-icon name="repeat"></ion-icon>
       Connections
     </ion-tab-button>
-    <ion-tab-button tab="profile">
+    <ion-tab-button tab="profile-mobile">
       <ion-icon name="person"></ion-icon>
       Profile
     </ion-tab-button>
